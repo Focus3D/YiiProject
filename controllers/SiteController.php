@@ -9,7 +9,6 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\User;
 
 class SiteController extends Controller
 {
@@ -62,15 +61,15 @@ class SiteController extends Controller
 
 		$model = new LoginForm();
 
-		if($model->setAttributes(Yii::$app->request->post('LoginForm')) && $model->validate()) {
-			/*if($model->login()){
-				$this->goBack();
-			}*/
+		if(Yii::$app->request->isPost) {
+			$model->setAttributes(Yii::$app->request->post('LoginForm'));
+			if($model->login()) {
+					$this->goBack();
+			}
 		}
 
 		return $this->render('login', [
 			'model' => $model,
-			'identity' => User::findByUsername(['username' => $model->username]),
 		]);
 
     }

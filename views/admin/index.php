@@ -6,3 +6,5 @@
  * Time: 11:08
  */
 $this->title = 'Admin';
+
+echo '<h1>Hello admin</h1>';

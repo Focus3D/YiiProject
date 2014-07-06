@@ -39,10 +39,4 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
     <?php ActiveForm::end(); ?>
-
-    <div class="col-lg-offset-1" style="color:#999;">
-        <pre><?= print_r($model, true) ?></pre>
-		<pre><?= print_r($identity, true) ?></pre>
-		<pre><?= print_r(Yii::$app->user, true) ?></pre>
-    </div>
 </div>

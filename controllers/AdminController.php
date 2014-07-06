@@ -21,7 +21,7 @@ class AdminController extends Controller {
 			$this->goHome();
 		}
 
-		//$this->layout = 'admin';
+		$this->layout = 'admin';
 		return $this->render('index');
 	}
 } 
