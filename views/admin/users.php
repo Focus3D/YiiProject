@@ -1,6 +1,8 @@
 <?php
 
 use yii\grid\GridView;
+use yii\data\ActiveDataProvider;
+use app\models\User;
 /**
  * Created by PhpStorm.
  * User: maksimtrunov
@@ -8,12 +10,23 @@ use yii\grid\GridView;
  * Time: 20:44
  */
 $this->title = 'Упраление пользователями';
-//$this->params['breadcrumbs'][] = ['label' => 'Админ панель', 'url' => Yii::$app->urlManager->createUrl('admin/index')];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="row">
-	<?GridView::widget(
-
-	)?>
+	<?php
+	$dataProvider = new ActiveDataProvider([
+		'query' => User::find(),
+		'pagination' => [
+			'pageSize' => 20,
+		],
+	]);
+	?>
+	<?php echo GridView::widget([
+		'id' => 'users',
+		'layout' => "{summary}\n{items}\n{pager}",
+		'tableOptions' => ['class' => 'table table-striped table-bordered'],
+		'caption' => 'Список пользователей',
+		'dataProvider' => $dataProvider,
+	])?>
 </div>

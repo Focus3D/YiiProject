@@ -76,4 +76,8 @@ class User extends ActiveRecord implements IdentityInterface
 		return false;
 	}
 
+	public static function getUsersList()
+	{
+		return static::find()->all();
+	}
 }
