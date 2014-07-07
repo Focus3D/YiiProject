@@ -1,13 +1,14 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\captcha\Captcha;
 
 /**
  * @var yii\web\View $this
  * @var yii\widgets\ActiveForm $form
  * @var app\models\LoginForm $model
  */
-$this->title = 'Register';
+$this->title = 'Регистрация';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
@@ -32,17 +33,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
 	<?= $form->field($model, 'email') ?>
 
+	<?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+		'template' => '<div class="row"><div class="col-lg-6">{image}</div><div class="col-lg-6">{input}</div></div>',
+	]) ?>
+
 
 	<div class="form-group">
 		<div class="col-lg-offset-1 col-lg-11">
-			<?= Html::submitButton('Register', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+			<?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
 		</div>
 	</div>
 
 	<?php ActiveForm::end(); ?>
 
-	<div class="col-lg-offset-1" style="color:#999;">
-		<pre><?= print_r($post, true)?></pre>
-		<pre><?= print_r($model, true)?></pre>
-	</div>
 </div>

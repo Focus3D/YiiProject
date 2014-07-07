@@ -20,6 +20,7 @@ class RegisterForm extends ActiveRecord
 	public $password2;
 	public $email;
 	public $auth_key;
+	public $verifyCode;
 
 	public static function tableName()
 	{
@@ -37,6 +38,7 @@ class RegisterForm extends ActiveRecord
 			['email', 'email'],
 			['password', 'compare', 'compareAttribute' => 'password2'],
 			['auth_key', 'safe'],
+			['verifyCode', 'captcha'],
 		];
 	}
 
