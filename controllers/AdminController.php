@@ -24,4 +24,11 @@ class AdminController extends Controller {
 		$this->layout = 'admin';
 		return $this->render('index');
 	}
+
+	public function actionUsers()
+	{
+
+		$this->layout = 'admin';
+		return $this->render('users');
+	}
 } 

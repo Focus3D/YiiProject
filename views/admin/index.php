@@ -5,6 +5,6 @@
  * Date: 22.06.14
  * Time: 11:08
  */
-$this->title = 'Admin';
+$this->title = 'Админ панель';
 
 echo '<h1>Hello admin</h1>';

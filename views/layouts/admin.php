@@ -30,7 +30,31 @@ AppAsset::register($this);
 
 	<?php $this->beginBody() ?>
 	<div class="wrap">
+		<?php
+		NavBar::begin([
+			'brandLabel' => 'Webhome',
+			'brandUrl' => Yii::$app->homeUrl,
+			'options' => [
+				'class' => 'navbar-inverse navbar-fixed-top',
+			],
+		]);
+		echo Nav::widget([
+			'options' => ['class' => 'navbar-nav navbar-right'],
+			'items' => [
+				['label' => 'Пользователи', 'url' => ['/admin/users']],
+				!Yii::$app->user->isGuest ?
+					['label' => 'Выйти (' . Yii::$app->user->identity->username . ')',
+						'url' => ['/site/logout'],
+						'linkOptions' => ['data-method' => 'post']] : '',
+			],
+		]);
+		NavBar::end();
+		?>
 		<div class="container">
+			<?= Breadcrumbs::widget([
+				'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+				'homeLink' => ['label' => 'Админ панель', 'url' => Yii::$app->urlManager->createUrl('admin/index')],
+			]) ?>
 			<?= $content ?>
 		</div>
 	</div>
