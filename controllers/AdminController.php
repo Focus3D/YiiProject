@@ -31,4 +31,12 @@ class AdminController extends Controller {
 		$this->layout = 'admin';
 		return $this->render('users');
 	}
+
+	public function actionViewUserAccountInfo($id)
+	{
+		$model = User::find($id);
+		return $this->render('viewUser',[
+			'model' => $model,
+		]);
+	}
 } 

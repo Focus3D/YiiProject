@@ -12,6 +12,7 @@ $config = [
 			'showScriptName' => false,
 			'suffix' => '.html',
 			'rules' => [
+				'<controller:(admin)>/<id:\d+>' => '<controller>/ViewUserAccountInfo',
 				'<controller:(admin)>/<action:(index)>' => '<controller>/<action>',
 				'<controller:(site)>/<action:(index|login|logout|contact|about)>' => '<controller>/<action>',
 			],
