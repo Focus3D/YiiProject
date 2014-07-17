@@ -9,7 +9,7 @@ use app\models\User;
  * Date: 07.07.14
  * Time: 20:44
  */
-$this->title = 'Упраление пользователями';
+$this->title = 'Список пользователей';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			['class' => 'yii\grid\DataColumn', 'attribute' => 'email', 'label' => 'Email'],
 			['class' => 'yii\grid\ActionColumn', 'controller' => 'admin',
 			 'urlCreator' => function($action, $model, $key, $index) {
-					 echo print_r($action.$key.$index, true);
+					 return Yii::$app->urlManager->createUrl('user/'.$model->id.'/'.$action);
 				 },
 			],
 		]

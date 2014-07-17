@@ -1,22 +1,15 @@
 <?php
+use yii\grid\GridView;
 /**
  * Created by PhpStorm.
  * User: maksimtrunov
- * Date: 13.07.14
- * Time: 19:28
+ * Date: 07.07.14
+ * Time: 20:44
  */
-
-use yii\grid\GridView;
-use yii\data\ActiveDataProvider;
-
-$this->title = 'Информация о пользователе';
+$this->title = 'Данные пользователя';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
 <div class="row">
-	<?php
-	$dataProvider = $model;
-	?>
 	<?php echo GridView::widget([
 		'id' => 'users',
 		'layout' => "{errors}\n{summary}\n{items}\n{pager}",
@@ -30,7 +23,11 @@ $this->params['breadcrumbs'][] = $this->title;
 			['class' => 'yii\grid\DataColumn', 'attribute' => 'id',],
 			['class' => 'yii\grid\DataColumn', 'attribute' => 'username', 'label' => 'Логин'],
 			['class' => 'yii\grid\DataColumn', 'attribute' => 'email', 'label' => 'Email'],
-			['class' => 'yii\grid\ActionColumn', 'controller' => 'admin',],
+			['class' => 'yii\grid\ActionColumn', 'controller' => 'admin',
+				'urlCreator' => function($action, $model) {
+						return \Yii::$app->urlManager->createUrl('user/'.$model['id'].'/'.$action);
+					},
+			],
 		]
 	])?>
 </div>

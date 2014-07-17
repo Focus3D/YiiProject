@@ -21,6 +21,9 @@ class User extends ActiveRecord implements IdentityInterface
         return static::findOne(['id' => $id]);
     }
 
+	public static function findAsArray($id) {
+		return static::find(['id' => $id])->one()->toArray();
+	}
     /**
      * @inheritdoc
      */

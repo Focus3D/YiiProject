@@ -12,7 +12,6 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\User;
 
 class AdminController extends Controller {
 
@@ -32,11 +31,4 @@ class AdminController extends Controller {
 		return $this->render('users');
 	}
 
-	public function actionViewUserAccountInfo($id)
-	{
-		$model = User::find($id);
-		return $this->render('viewUser',[
-			'model' => $model,
-		]);
-	}
 } 
