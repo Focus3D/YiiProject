@@ -16,7 +16,16 @@ use app\models\User;
 
 class UserController extends Controller {
 
+	public function actionAll() {
+
+		$this->layout = 'admin';
+
+		return $this->render('users');
+	}
+
 	public function actionView($id) {
+
+		$this->layout = 'admin';
 
 		$dataProvider = new ActiveDataProvider([
 			'query' => User::find()->filterWhere(['id' => $id]),

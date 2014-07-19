@@ -10,6 +10,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use \yii\helpers\Url;
 
 /**
  * @var \yii\web\View $this
@@ -32,8 +33,8 @@ AppAsset::register($this);
 	<div class="wrap">
 		<?php
 		NavBar::begin([
-			'brandLabel' => 'Webhome',
-			'brandUrl' => Yii::$app->homeUrl,
+			'brandLabel' => 'Администрирование',
+			'brandUrl' => Url::to(['admin/index']),
 			'options' => [
 				'class' => 'navbar-inverse navbar-fixed-top',
 			],
@@ -41,7 +42,7 @@ AppAsset::register($this);
 		echo Nav::widget([
 			'options' => ['class' => 'navbar-nav navbar-right'],
 			'items' => [
-				['label' => 'Пользователи', 'url' => ['/admin/users']],
+				['label' => 'В публичную часть', 'url' => ['site/index']],
 				!Yii::$app->user->isGuest ?
 					['label' => 'Выйти (' . Yii::$app->user->identity->username . ')',
 						'url' => ['/site/logout'],
@@ -53,7 +54,7 @@ AppAsset::register($this);
 		<div class="container">
 			<?= Breadcrumbs::widget([
 				'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-				'homeLink' => ['label' => 'Админ панель', 'url' => Yii::$app->urlManager->createUrl('admin/index')],
+				'homeLink' => ['label' => 'Admin panel', 'url' => Url::to(['admin/index'])],
 			]) ?>
 			<?= $content ?>
 		</div>

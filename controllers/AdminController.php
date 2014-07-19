@@ -30,9 +30,4 @@ class AdminController extends Controller
 		return $this->render('index');
 	}
 
-	public function actionUsers()
-	{
-		return $this->render('users');
-	}
-
 } 
