@@ -13,7 +13,13 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 
-class AdminController extends Controller {
+class AdminController extends Controller
+{
+	public function beforeAction($action) {
+		$this->layout = 'admin';
+		parent::beforeAction($action);
+		return true;
+	}
 
 	public function actionIndex()
 	{
@@ -21,13 +27,11 @@ class AdminController extends Controller {
 			$this->goHome();
 		}
 
-		$this->layout = 'admin';
 		return $this->render('index');
 	}
 
 	public function actionUsers()
 	{
-		$this->layout = 'admin';
 		return $this->render('users');
 	}
 

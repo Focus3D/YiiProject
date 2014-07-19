@@ -44,6 +44,10 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+		'security' => [
+			'class' => 'yii\base\Security',
+			'passwordHashStrategy' => 'crypt',
+		],
     ],
     'params' => $params,
 ];

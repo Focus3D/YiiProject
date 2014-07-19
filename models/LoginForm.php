@@ -4,7 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
-use yii\helpers\Security;
+use yii\base\Security;
 use app\models\User;
 
 /**
@@ -52,7 +52,7 @@ class LoginForm extends Model
 	public function validatePassword($password)
 	{
 		$user = $this->getUser();
-		return Security::validatePassword($password, $user->getAttribute('password'));
+		return Yii::$app->security->validatePassword($password, $user->getAttribute('password'));
 	}
 
     /**

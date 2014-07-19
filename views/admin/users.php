@@ -30,6 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		'captionOptions' => ['class' => 'lead'],
 		//'rowOptions' => ['class' => 'col-sm-12 col-md-12 col-lg-12'],
 		'caption' => 'Список пользователей',
+		'filterSelector' => 'filter',
+		'filterUrl' => Yii::$app->urlManager->createUrl('user/filter'),
 		'dataProvider' => $dataProvider,
 		'columns' => [
 			['class' => 'yii\grid\DataColumn', 'attribute' => 'id',],

@@ -4,11 +4,15 @@ namespace app\models;
 
 use \yii\db\ActiveRecord;
 use \yii\web\IdentityInterface;
-use \yii\helpers\Security;
+use \yii\base\Security;
 use \Yii;
 
 class User extends ActiveRecord implements IdentityInterface
 {
+
+	public function actionFilter() {
+
+	}
 
 	public static function tableName() {
 		return 'users';

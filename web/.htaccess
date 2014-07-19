@@ -7,5 +7,5 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php
 
 #RewriteCond %{REMOTE_ADDR} !10.0.0.2 [OR]
-RewriteCond %{REMOTE_ADDR} !77.120.128.77
-RewriteRule . construct.php
+#RewriteCond %{REMOTE_ADDR} !77.120.128.77
+#RewriteRule . construct.php
