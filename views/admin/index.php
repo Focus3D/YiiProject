@@ -5,6 +5,9 @@
  * Date: 22.06.14
  * Time: 11:08
  */
-$this->title = 'Админ панель';
+use yii\widgets\Block;
 
-echo '<h1>Hello admin</h1>';
+$this->title = 'Администрирование';
+
+$block = new Block();
+
