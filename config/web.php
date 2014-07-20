@@ -7,6 +7,9 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
+		'request' => [
+			'cookieValidationKey' => 'af6191c79d23c085e8e49c8966cbdaae',
+		],
 		'urlManager' => [
 			'enablePrettyUrl' => true,
 			'showScriptName' => false,
@@ -14,7 +17,7 @@ $config = [
 			'rules' => [
 				'<controller:(user)>/<id:\d+>/<action:(view|update|delete|create)>' => 'user/<action>',
 				'<controller:(admin)>/<action:(index)>' => '<controller>/<action>',
-				'<controller:(site)>/<action:(index|login|logout|contact|about)>' => '<controller>/<action>',
+				'<controller:(site)>/<action:(index|login|logout|contact|about|phpinfo)>' => '<controller>/<action>',
 			],
 		],
         'cache' => [
@@ -49,8 +52,7 @@ $config = [
 			'passwordHashStrategy' => 'crypt',
 		],
 		'image' => [
-			'class' => 'yii\image\ImageDriver',
-			'driver' => 'GD',
+			'class' => 'yii\imagine\Image',
 		],
     ],
     'params' => $params,

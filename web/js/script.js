@@ -4,8 +4,8 @@
 $(function () {
     $('.bxslider').bxSlider({
         slideWidth: 300,
+        slideMargin: 10,
         minSlides: 3,
-        maxSlides: 3,
-        slideMargin: 10
+        maxSlides: 3
     });
 });

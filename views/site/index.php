@@ -3,7 +3,7 @@
  * @var yii\web\View $this
  */
 use yii\helpers\Html;
-use yii\image\ImageDriver;
+use Imagine\Image\Box;
 
 $this->title = 'Welcome in My Yii Application';
 ?>
@@ -12,11 +12,7 @@ $this->title = 'Welcome in My Yii Application';
     <div class="jumbotron">
         <h1><?=Html::encode($this->title);?></h1>
 		<div class="row">
-			<?
-			$file = Yii::getAlias('@webroot').'/images/Abstract.jpg';
-			$imageDriver = new ImageDriver();
-			var_dump($imageDriver);
-			?>
+
 		</div>
     </div>
 
@@ -24,9 +20,10 @@ $this->title = 'Welcome in My Yii Application';
 
         <div class="row">
 			<ul class="bxslider">
-				<li><img src="/images/Antelope Canyon.jpg" /></li>
-				<li><img src="/images/Bahamas Aerial.jpg" /></li>
-				<li><img src="/images/Desert.jpg" /></li>
+				<?php
+				foreach($resizeImagesArray as $i => $image) : ?>
+					<li><img src="<?=$image?>" /></li>
+				<?php endforeach;?>
 			</ul>
         </div>
 

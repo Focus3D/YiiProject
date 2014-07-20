@@ -47,6 +47,7 @@ AppAsset::register($this);
 					['label' => 'Выйти (' . Yii::$app->user->identity->username . ')',
 						'url' => ['/site/logout'],
 						'linkOptions' => ['data-method' => 'post']] : '',
+				['label' => 'PHP Info', 'url' => ['site/phpinfo']],
 			],
 		]);
 		NavBar::end();

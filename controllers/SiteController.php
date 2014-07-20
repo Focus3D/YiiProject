@@ -7,12 +7,12 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 use app\models\LoginForm;
 use app\models\ContactForm;
 
 class SiteController extends Controller
 {
-	public $enableCsrfValidation = false;
 
     public function behaviors()
     {
@@ -50,9 +50,30 @@ class SiteController extends Controller
         ];
     }
 
+	public function actionPhpinfo()
+	{
+		return $this->render('phpinfo');
+	}
+
     public function actionIndex()
     {
-        return $this->render('index');
+		$images = ['Abstract.jpg', 'Antelope Canyon.jpg', 'Bahamas Aerial.jpg', 'Desert.jpg'];
+		$basePath = Yii::$app->getBasePath();
+		$Image = Yii::$app->image;
+		$runtimePath = Yii::$app->getRuntimePath();
+
+		$resizeImagesArray = array();
+
+		foreach($images as $i => $image) {
+			if(!file_exists($basePath. '/web/images/thumb-' .$image)) {
+				$Image::thumbnail('@app/web/images/' .$image , 300, 200)
+					->save($basePath. '/web/images/thumb-' .$image, ['quality' => 100]);
+			}
+			$resizeImagesArray[] = '/images/thumb-' .$image;
+		}
+        return $this->render('index', [
+			'resizeImagesArray' => $resizeImagesArray,
+		]);
     }
 
     public function actionLogin()
