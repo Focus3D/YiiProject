@@ -48,6 +48,10 @@ $config = [
 			'class' => 'yii\base\Security',
 			'passwordHashStrategy' => 'crypt',
 		],
+		'image' => [
+			'class' => 'yii\image\ImageDriver',
+			'driver' => 'GD',
+		],
     ],
     'params' => $params,
 ];
