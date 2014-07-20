@@ -20,7 +20,16 @@ class UserController extends Controller {
 
 		$this->layout = 'admin';
 
-		return $this->render('users');
+		$dataProvider = new ActiveDataProvider([
+			'query' => User::find(),
+			'pagination' => [
+				'pageSize' => 20,
+			],
+		]);
+
+		return $this->render('users', [
+			'dataProvider' => $dataProvider,
+		]);
 	}
 
 	public function actionView($id) {

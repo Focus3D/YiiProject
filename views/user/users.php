@@ -14,14 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="row">
-	<?php
-	$dataProvider = new ActiveDataProvider([
-		'query' => User::find(),
-		'pagination' => [
-			'pageSize' => 20,
-		],
-	]);
-	?>
 	<?php echo GridView::widget([
 		'id' => 'users',
 		'layout' => "{errors}\n{summary}\n{items}\n{pager}",
@@ -38,9 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
 			['class' => 'yii\grid\DataColumn', 'attribute' => 'username', 'label' => 'Логин'],
 			['class' => 'yii\grid\DataColumn', 'attribute' => 'email', 'label' => 'Email'],
 			['class' => 'yii\grid\ActionColumn', 'controller' => 'admin',
-			 'urlCreator' => function($action, $model, $key, $index) {
-					 return Yii::$app->urlManager->createUrl('user/'.$model->id.'/'.$action);
-				 },
+				'urlCreator' => function($action, $model, $key, $index) {
+						return Yii::$app->urlManager->createUrl('user/'.$model->id.'/'.$action);
+					},
 			],
 		]
 	])?>
