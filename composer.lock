@@ -217,57 +217,6 @@
             "time": "2014-07-03 13:54:59"
         },
         {
-            "name": "twbs/bootstrap",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "a035ee59ae73510ebdb1064e59b4b16f1da9fc66"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/a035ee59ae73510ebdb1064e59b4b16f1da9fc66",
-                "reference": "a035ee59ae73510ebdb1064e59b4b16f1da9fc66",
-                "shasum": ""
-            },
-            "replace": {
-                "twitter/bootstrap": "self.version"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.2.x-dev"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jacob Thornton",
-                    "email": "jacobthornton@gmail.com"
-                },
-                {
-                    "name": "Mark Otto",
-                    "email": "markdotto@gmail.com"
-                }
-            ],
-            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
-            "homepage": "http://getbootstrap.com",
-            "keywords": [
-                "JS",
-                "css",
-                "framework",
-                "front-end",
-                "less",
-                "mobile-first",
-                "responsive",
-                "web"
-            ],
-            "time": "2014-07-20 05:11:07"
-        },
-        {
             "name": "yiisoft/jquery",
             "version": "2.1.1",
             "source": {
@@ -396,47 +345,6 @@
                 "yii2"
             ],
             "time": "2014-07-20 12:01:16"
-        },
-        {
-            "name": "yiisoft/yii2-bootstrap",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yiisoft/yii2-bootstrap.git",
-                "reference": "5e10e2833b960662f74c591cebb7506095baea7b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/5e10e2833b960662f74c591cebb7506095baea7b",
-                "reference": "5e10e2833b960662f74c591cebb7506095baea7b",
-                "shasum": ""
-            },
-            "require": {
-                "twbs/bootstrap": "3.2.* | 3.1.* | 3.0.*",
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "yii\\bootstrap\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Qiang Xue",
-                    "email": "qiang.xue@gmail.com"
-                }
-            ],
-            "description": "The Twitter Bootstrap extension for the Yii framework",
-            "keywords": [
-                "bootstrap",
-                "yii2"
-            ],
-            "time": "2014-07-19 23:15:23"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -664,8 +572,7 @@
                 "shasum": ""
             },
             "require": {
-                "yiisoft/yii2": "*",
-                "yiisoft/yii2-bootstrap": "*"
+                "yiisoft/yii2": "*"
             },
             "type": "yii2-extension",
             "autoload": {
@@ -709,8 +616,7 @@
             },
             "require": {
                 "phpspec/php-diff": ">=1.0.2",
-                "yiisoft/yii2": "*",
-                "yiisoft/yii2-bootstrap": "*"
+                "yiisoft/yii2": "*"
             },
             "type": "yii2-extension",
             "autoload": {
