@@ -22,6 +22,9 @@ class AppAsset extends AssetBundle
 		'css/jquery.bxslider.css',
     ];
     public $js = [
+		'js/jquery.ui.widget.js',
+		'js/jquery.iframe-transport.js',
+		'js/jquery.fileupload.js',
 		'js/jquery.bxslider.min.js',
 		'js/script.js'
     ];

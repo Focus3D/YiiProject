@@ -18,6 +18,7 @@ $config = [
 				'<controller:(user)>/<id:\d+>/<action:(view|update|delete|create)>' => 'user/<action>',
 				'<controller:(admin)>/<action:(index)>' => '<controller>/<action>',
 				'<controller:(site)>/<action:(index|login|logout|contact|about|phpinfo)>' => '<controller>/<action>',
+				'<controller:(file)>/<action:(save)>' => '<controller>/<action>',
 			],
 		],
         'cache' => [

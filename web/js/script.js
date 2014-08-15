@@ -9,4 +9,15 @@ $(function () {
         minSlides: 3,
         maxSlides: 3
     });
+
+    $('#fileupload').fileupload({
+        url: '/file/save',
+        dataType: 'json',
+        data: user_id,
+        done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+                $('<p/>').text(file.name).appendTo(document.body);
+            });
+        }
+    });
 });
