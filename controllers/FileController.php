@@ -13,10 +13,10 @@ use yii\web\Controller;
 
 class FileController extends Controller{
 
-	private $_userID;
+	public $enableCsrfValidation = false;
 
 	public function actionSave()
 	{
-
+		Yii::getLogger()->log(print_r('Files '. $_FILES, true), Logger::LEVEL_INFO);
 	}
 } 

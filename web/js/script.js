@@ -10,14 +10,21 @@ $(function () {
         maxSlides: 3
     });
 
+    var url = $('input:file').data('url');
+
     $('#fileupload').fileupload({
-        url: '/file/save',
+        url: url,
         dataType: 'json',
-        data: user_id,
-        done: function (e, data) {
-            $.each(data.result.files, function (index, file) {
-                $('<p/>').text(file.name).appendTo(document.body);
+        add: function (e, data) {
+            console.log(e);
+        },
+        change: function (e, data) {
+            $.each(data.files, function (index, file) {
+                console.log(file);
             });
+        },
+        done: function (e, data) {
+            console.log(data);
         }
     });
 });
