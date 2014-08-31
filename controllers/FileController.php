@@ -17,6 +17,11 @@ class FileController extends Controller{
 
 	public function actionSave()
 	{
-		Yii::getLogger()->log(print_r('Files '. $_FILES, true), Logger::LEVEL_INFO);
+		$app = Yii::$app;
+
+		if($app->request->isAjax) {
+			Yii::info(print_r($_FILES, true));
+			return $this->renderAjax(json_encode(['status' => 'ok']));
+		}
 	}
 } 

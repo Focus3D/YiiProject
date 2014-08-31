@@ -10,13 +10,16 @@ $(function () {
         maxSlides: 3
     });
 
-    var url = $('input:file').data('url');
-
     $('#fileupload').fileupload({
-        url: url,
         dataType: 'json',
         add: function (e, data) {
-            console.log(e);
+            $.each(data.files, function (index, file) {
+                console.log('Added file: ' + file.name);
+            });
+            var jqXHR = data.submit()
+                .success(function (result, textStatus, jqXHR) {console.log(result); })
+                .error(function (jqXHR, textStatus, errorThrown) {console.log(jqXHR); })
+                .complete(function (result, textStatus, jqXHR) {console.log(result); });
         },
         change: function (e, data) {
             $.each(data.files, function (index, file) {
@@ -25,6 +28,9 @@ $(function () {
         },
         done: function (e, data) {
             console.log(data);
+        },
+        start: function (e) {
+            console.log('Uploads started');
         }
     });
 });

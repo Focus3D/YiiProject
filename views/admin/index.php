@@ -27,9 +27,6 @@ $this->title = 'Администрирование';
 					<div class="form-group">
 						<label for="fileupload">Кнопка загрузки</label>
 						<input id="fileupload" data-url="<?=Url::to(['file/save'])?>" class="form-control" type="file" name="upload-file">
-						<div id="progress">
-							<div class="bar" style="width: 0%;"></div>
-						</div>
 					</div>
 				</form>
 			</div>
