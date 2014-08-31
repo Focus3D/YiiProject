@@ -1,5 +1,6 @@
 <?php
 use yii\grid\GridView;
+
 /**
  * Created by PhpStorm.
  * User: maksimtrunov
@@ -24,8 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
 			['class' => 'yii\grid\DataColumn', 'attribute' => 'username', 'label' => 'Логин'],
 			['class' => 'yii\grid\DataColumn', 'attribute' => 'email', 'label' => 'Email'],
 			['class' => 'yii\grid\ActionColumn', 'controller' => 'admin',
-				'urlCreator' => function($action, $model) {
-						return \Yii::$app->urlManager->createUrl('user/'.$model['id'].'/'.$action);
+				'urlCreator' => function ($action, $model) {
+						return \Yii::$app->urlManager->createUrl('user/' . $model['id'] . '/' . $action);
 					},
 			],
 		]

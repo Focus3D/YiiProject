@@ -8,6 +8,7 @@
 
 namespace app\controllers;
 
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -27,7 +28,11 @@ class AdminController extends Controller
 			$this->goHome();
 		}
 
-		return $this->render('index');
+		$userCount = User::getCount();
+
+		return $this->render('index', [
+			'users' => $userCount,
+		]);
 	}
 
 } 

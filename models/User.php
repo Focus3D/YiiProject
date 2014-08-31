@@ -25,6 +25,13 @@ class User extends ActiveRecord implements IdentityInterface
         return static::findOne(['id' => $id]);
     }
 
+	/**
+	 * @return integer count users in DB
+	 */
+	public static function getCount() {
+		return parent::find()->count();
+	}
+
 	public static function findAsArray($id) {
 		return static::find(['id' => $id])->one()->toArray();
 	}
