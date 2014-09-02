@@ -27,7 +27,7 @@ $this->title = 'Администрирование';
 		<div class="panel panel-primary">
 			<div class="panel-heading">Оплата</div>
 			<div class="panel-body">
-				<form class="form-horizontal" role="form">
+				<form class="form-horizontal" role="form" action="<?=Url::to(['yandex/index'])?>">
 					<div class="form-group">
 						<label class="col-xs-4 control-label">Назначение</label>
 						<div class="col-xs-8">

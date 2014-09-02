@@ -20,8 +20,18 @@ use YandexMoney\Request\ProcessPaymentByCardRequest;
 use YandexMoney\Request\ProcessPaymentByWalletRequest;
 use YandexMoney\YandexMoney;
 
-class PaymentController extends Controller
+define ('CLIENT_ID', 'YOUR_CLIENT_ID');
+define ('REDIRECT_URI', 'YOUR_REDIRECT_URI');
+define ('CLIENT_SECRET', 'YOUR_CLIENT_SECRET');
+define ('NOTIFICATION_SECRET', 'YOUR_NOTIFICATION_SECRET');
+
+define('TEST_MODE', 1);
+define('APP_MODE', 2);
+
+class YandexController extends Controller
 {
+	private $currentMode = TEST_MODE;
+
 	public $enableCsrfValidation = false;
 
 	public function actionIndex()
@@ -31,9 +41,7 @@ class PaymentController extends Controller
 		$rightsConfigurator->addRight(Rights::OPERATION_HISTORY);
 		$rightsConfigurator->addRight(Rights::OPERATION_DETAILS);
 		$rightsConfigurator->paymentToAccount("410011161616877", PaymentIdentifier::ACCOUNT, 0, 30);
-		$rightsConfigurator->paymentToPattern("337", 0, 30);
 		$rightsConfigurator->setMoneySource(MoneySource::WALLET);
-
 
 		$authRequestBuilder = YandexMoney::getAuthRequestBuilder();
 		$authRequestBuilder->setClientId(CLIENT_ID);
@@ -52,9 +60,40 @@ class PaymentController extends Controller
 		}
 
 
-		return $this->render('index', [
-			'code' => $originalServerResponse->getCode(),
-			'location' => $originalServerResponse->getHeader('Location'),
+		$this->redirect($originalServerResponse->getHeader('Location'));
+	}
+
+	public function actionToken()
+	{
+		$code = $request->query->get('code');
+		$error = $request->query->get('error');
+
+
+		$apiFacade = YandexMoney::getApiFacade();
+		$apiFacade->setClientId(CLIENT_ID);
+		$apiFacade->setLogFile(__DIR__ . '/ym.log');
+
+		$oAuthTokenResponse = null;
+		try {
+			$oAuthTokenResponse = $apiFacade->getOAuthToken($code, REDIRECT_URI, CLIENT_SECRET);
+		} catch (\Exception $e) {
+			echo $e->getMessage();
+		}
+
+		$result = "Empty result";
+		if ($oAuthTokenResponse != null) {
+			if ($oAuthTokenResponse->isSuccess()) {
+				$app['session']->set('token', $oAuthTokenResponse->getAccessToken());
+				$result = $oAuthTokenResponse->getAccessToken();
+			} else {
+				$result = $oAuthTokenResponse->getError();
+			}
+
+
+		}
+
+		return $this->render('token', [
+			'result' => $result,
 		]);
 	}
 } 
