@@ -23,4 +23,5 @@ phpunit.phar
 # local phpunit config
 /phpunit.xml
 /web/phpmyadmin
-web/images/
+/web/images/
+/upload

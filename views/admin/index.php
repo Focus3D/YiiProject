@@ -11,13 +11,14 @@ use yii\helpers\Url;
 $this->title = 'Администрирование';
 ?>
 
+<pre><?=print_r($users, true)?></pre>
 <div class="row">
 	<div class="col-xs-3">
 		<ul class="nav nav-pills nav-stacked">
 			<li>
 				<a href="<?=Url::to(['user/all'])?>" class="btn btn-primary">Пользователи
 					<span class="badge pull-right">
-						<?=(isset($users)) ? $users : ''?>
+						<?=(isset($count)) ? $count : ''?>
 					</span>
 				</a>
 			</li>

@@ -28,10 +28,12 @@ class AdminController extends Controller
 			$this->goHome();
 		}
 
-		$userCount = User::getCount();
+		$count = User::getCount();
+		$users = User::find()->all();
 
 		return $this->render('index', [
-			'users' => $userCount,
+			'count' => $count,
+			'users' => $users,
 		]);
 	}
 
