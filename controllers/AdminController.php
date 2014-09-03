@@ -10,6 +10,8 @@ namespace app\controllers;
 
 use app\models\User;
 use Yii;
+use yii\data\ActiveDataProvider;
+use yii\db\Query;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -29,11 +31,16 @@ class AdminController extends Controller
 		}
 
 		$count = User::getCount();
-		$users = User::find()->all();
+		$dataProvider = new ActiveDataProvider([
+			'query' => User::find(),
+			'pagination' => [
+
+			],
+		]);
 
 		return $this->render('index', [
 			'count' => $count,
-			'users' => $users,
+			'dataProvider' => $dataProvider,
 		]);
 	}
 

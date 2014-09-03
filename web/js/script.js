@@ -12,25 +12,9 @@ $(function () {
 
     $('#fileupload').fileupload({
         dataType: 'json',
-        add: function (e, data) {
-            $.each(data.files, function (index, file) {
-                console.log('Added file: ' + file.name);
-            });
-            var jqXHR = data.submit()
-                .success(function (result, textStatus, jqXHR) {console.log(result); })
-                .error(function (jqXHR, textStatus, errorThrown) {console.log(jqXHR); })
-                .complete(function (result, textStatus, jqXHR) {console.log(result); });
-        },
-        change: function (e, data) {
-            $.each(data.files, function (index, file) {
-                console.log(file);
-            });
-        },
-        done: function (e, data) {
-            console.log(data);
-        },
-        start: function (e) {
-            console.log('Uploads started');
-        }
+        autoUpload: false,
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+        maxFileSize: 5000000, // 5 MB
+
     });
 });

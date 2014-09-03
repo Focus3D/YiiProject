@@ -20,6 +20,8 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
 		'css/jquery.bxslider.css',
+		'css/jquery.fileupload-ui.css',
+		'css/jquery.fileupload.css',
     ];
     public $js = [
 		'js/jquery.ui.widget.js',
