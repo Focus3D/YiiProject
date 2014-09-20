@@ -13,7 +13,7 @@ $config = [
 		'urlManager' => [
 			'enablePrettyUrl' => true,
 			'showScriptName' => false,
-			'suffix' => '.xml',
+			'suffix' => '.html',
 			'rules' => [
 				'<controller:(user)>/<id:\d+>/<action:(view|update|delete|create)>' => 'user/<action>',
 				'<controller:(admin)>/<action:(index)>' => '<controller>/<action>',
@@ -65,7 +65,7 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
 		'class' => 'yii\debug\Module',
-		'allowedIPs' => ['127.0.0.1', '::1', '77.120.128.77']
+		'allowedIPs' => ['127.0.0.1', '::1']
 	];
 
     $config['bootstrap'][] = 'gii';

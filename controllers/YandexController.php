@@ -63,7 +63,7 @@ class YandexController extends Controller
 		$this->redirect($originalServerResponse->getHeader('Location'));
 	}
 
-	public function actionToken()
+	public function actionToken($request)
 	{
 		$code = $request->query->get('code');
 		$error = $request->query->get('error');

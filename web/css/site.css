@@ -41,7 +41,6 @@ a.asc:after, a.desc:after {
     position: relative;
     top: 1px;
     display: inline-block;
-    font-family: 'Glyphicons Halflings';
     font-style: normal;
     font-weight: normal;
     line-height: 1;
@@ -92,4 +91,11 @@ a.desc:after {
 .bar {
     height: 18px;
     background: green;
+}
+.wrap {
+	background: url(../images/background.jpg);
+}
+.footer {
+	color: #fff;
+	background: #000;
 }

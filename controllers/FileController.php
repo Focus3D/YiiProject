@@ -17,11 +17,14 @@ class FileController extends Controller{
 
 	public function actionSave()
 	{
-		$app = Yii::$app;
-
-		if($app->request->isAjax) {
+		if(Yii::$app->request->isAjax) {
 			Yii::info(print_r($_FILES, true));
 			return $this->renderAjax(json_encode(['status' => 'ok']));
-		}
+		} else return $this->renderAjax(json_encode(['status' => 'error']));
+	}
+
+	public function actionUpload()
+	{
+		return $this->render('upload');
 	}
 } 

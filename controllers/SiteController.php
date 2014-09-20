@@ -66,7 +66,7 @@ class SiteController extends Controller
 
 		foreach($images as $i => $image) {
 			if(!file_exists($basePath. '/web/images/thumb-' .$image)) {
-				$Image::thumbnail('@app/web/images/' .$image , 300, 200)
+				$Image::thumbnail('@app/web/images/' .$image , 600, 400)
 					->save($basePath. '/web/images/thumb-' .$image, ['quality' => 100]);
 			}
 			$resizeImagesArray[] = '/images/thumb-' .$image;
