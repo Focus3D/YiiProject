@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use yii\web\YiiAsset;
 
 class SiteController extends Controller
 {
@@ -57,23 +58,7 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-		$images = ['Abstract.jpg', 'Antelope Canyon.jpg', 'Bahamas Aerial.jpg', 'Desert.jpg'];
-		$basePath = Yii::$app->getBasePath();
-		$Image = Yii::$app->image;
-		$runtimePath = Yii::$app->getRuntimePath();
-
-		$resizeImagesArray = array();
-
-		foreach($images as $i => $image) {
-			if(!file_exists($basePath. '/web/images/thumb-' .$image)) {
-				$Image::thumbnail('@app/web/images/' .$image , 600, 400)
-					->save($basePath. '/web/images/thumb-' .$image, ['quality' => 100]);
-			}
-			$resizeImagesArray[] = '/images/thumb-' .$image;
-		}
-        return $this->render('index', [
-			'resizeImagesArray' => $resizeImagesArray,
-		]);
+        return $this->render('index');
     }
 
     public function actionLogin()

@@ -19,15 +19,14 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
-		'css/jquery.bxslider.css',
 		'css/jquery.fileupload-ui.css',
 		'css/jquery.fileupload.css',
+		'css/home.css',
     ];
     public $js = [
 		'js/jquery.ui.widget.js',
 		'js/jquery.iframe-transport.js',
 		'js/jquery.fileupload.js',
-		'js/jquery.bxslider.min.js',
 		'js/script.js',
     ];
     public $depends = [

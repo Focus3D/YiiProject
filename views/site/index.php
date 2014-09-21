@@ -7,25 +7,14 @@ use Imagine\Image\Box;
 
 $this->title = 'Welcome in My Yii Application';
 ?>
-<div class="site-index">
 
-    <div class="jumbotron">
-        <h1><?=Html::encode($this->title);?></h1>
-		<div class="row">
+<div class="inner cover">
+	<h1 class="cover-heading"> Cover your page .</h1>
 
-		</div>
-    </div>
+	<p class="lead"> Cover is a one - page template for building simple and beautiful home pages . Download,
+		edit the text, and add your own fullscreen background photo to make it your own .</p>
 
-    <div class="body-content">
-
-        <div class="row">
-			<ul class="bxslider">
-				<?php
-				foreach($resizeImagesArray as $i => $image) : ?>
-					<li><img src="<?=$image?>" /></li>
-				<?php endforeach;?>
-			</ul>
-        </div>
-
-    </div>
+	<p class="lead">
+		<a href="#" class="btn btn-lg btn-default"> Learn more </a>
+	</p>
 </div>
