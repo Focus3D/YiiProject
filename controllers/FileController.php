@@ -18,9 +18,14 @@ class FileController extends Controller{
 	public function actionSave()
 	{
 		if(Yii::$app->request->isAjax) {
-			Yii::info(print_r($_FILES, true));
-			return $this->renderAjax(json_encode(['status' => 'ok']));
-		} else return $this->renderAjax(json_encode(['status' => 'error']));
+			if(!empty($_FILES)) {
+				foreach ($_FILES as $file) {
+					if ($file['error'][0] == 0 && move_uploaded_file($file['tmp_name'][0], Yii::$app->basePath . '/upload/' . $file['name'][0])) {
+						return $this->renderAjax('save', ['status' => 'ok']);
+					}
+				}
+			}
+		} else return $this->renderAjax('save', ['status' => 'error']);
 	}
 
 	public function actionUpload()

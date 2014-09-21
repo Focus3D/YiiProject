@@ -4,9 +4,25 @@ $params = require(__DIR__ . '/params.php');
 
 $config = [
     'id' => 'basic',
+	'charset' => 'UTF-8',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+	'language' => 'ru-RU',
     'components' => [
+		'i18n' => [
+			'translations' => [
+				'app*' => [
+					'class' => 'yii\i18n\PhpMessageSource',
+					'basePath' => '@app/messages',
+					'sourceLanguage' => 'en-US',
+					'fileMap' => [
+						'app' => 'app.php',
+						'app/error' => 'error.php',
+						'app/file' => 'file.php',
+					],
+				],
+			],
+		],
 		'request' => [
 			'cookieValidationKey' => 'af6191c79d23c085e8e49c8966cbdaae',
 		],
@@ -37,7 +53,7 @@ $config = [
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -65,7 +81,7 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
 		'class' => 'yii\debug\Module',
-		'allowedIPs' => ['127.0.0.1', '::1']
+		'allowedIPs' => ['127.0.0.1', '::1'/*, '77.120.128.77'*/]
 	];
 
     $config['bootstrap'][] = 'gii';

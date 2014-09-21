@@ -28,7 +28,7 @@ class AppAsset extends AssetBundle
 		'js/jquery.iframe-transport.js',
 		'js/jquery.fileupload.js',
 		'js/jquery.bxslider.min.js',
-		'js/script.js'
+		'js/script.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

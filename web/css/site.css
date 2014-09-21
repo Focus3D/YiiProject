@@ -99,3 +99,7 @@ a.desc:after {
 	color: #fff;
 	background: #000;
 }
+.upload-form {
+	width: 400px;
+	margin: 300px auto;
+}
