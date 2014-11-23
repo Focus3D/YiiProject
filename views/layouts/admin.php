@@ -30,43 +30,46 @@ AppAsset::register($this);
 	<body>
 
 	<?php $this->beginBody() ?>
-	<div class="wrap">
-		<?php
-		NavBar::begin([
-			'brandLabel' => 'Администрирование',
-			'brandUrl' => Url::to(['admin/index']),
-			'options' => [
-				'class' => 'navbar-inverse navbar-fixed-top',
-			],
-		]);
-		echo Nav::widget([
-			'options' => ['class' => 'navbar-nav navbar-right'],
-			'items' => [
-				['label' => 'В публичную часть', 'url' => ['site/index']],
-				!Yii::$app->user->isGuest ?
-					['label' => 'Выйти (' . Yii::$app->user->identity->username . ')',
-						'url' => ['/site/logout'],
-						'linkOptions' => ['data-method' => 'post']] : '',
-				['label' => 'PHP Info', 'url' => ['site/phpinfo']],
-			],
-		]);
-		NavBar::end();
-		?>
-		<div class="container">
+	<div class="container">
+		<div class="page-header">
+			<?php
+			NavBar::begin([
+				'brandLabel' => 'Администрирование',
+				'brandUrl' => Url::to(['admin/index']),
+				'options' => [
+					'class' => 'navbar-inverse navbar-fixed-top',
+				],
+			]);
+			echo Nav::widget([
+				'options' => ['class' => 'navbar-nav navbar-right'],
+				'items' => [
+					['label' => 'В публичную часть', 'url' => ['site/index']],
+					!Yii::$app->user->isGuest ?
+						['label' => 'Выйти (' . Yii::$app->user->identity->username . ')',
+							'url' => ['/site/logout'],
+							'linkOptions' => ['data-method' => 'get']] : '',
+					['label' => 'PHP Info', 'url' => ['site/phpinfo']],
+				],
+			]);
+			NavBar::end();
+			?>
+		</div>
+		<div class="row">
 			<?= Breadcrumbs::widget([
 				'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-				'homeLink' => ['label' => 'Admin panel', 'url' => Url::to(['admin/index'])],
+				'homeLink' => ['label' => 'Admin panel', 'url' => Url::toRoute('admin')],
 			]) ?>
-			<?= $content ?>
 		</div>
+		<?= $content ?>
+		<footer class="navbar-fixed-bottom">
+			<div class="container">
+				<div class="col-lg-12">
+					<p class="pull-left">&copy; Maksim Trunov <?= date('Y') ?></p>
+					<p class="pull-right"><?= Yii::powered() ?></p>
+				</div>
+			</div>
+		</footer>
 	</div>
-
-	<footer class="footer">
-		<div class="container">
-			<p class="pull-left">&copy; Maksim Trunov <?= date('Y') ?></p>
-			<p class="pull-right"><?= Yii::powered() ?></p>
-		</div>
-	</footer>
 
 	<?php $this->endBody() ?>
 	</body>

@@ -32,7 +32,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    'logout' => ['get'],
                 ],
             ],
         ];
@@ -58,7 +58,11 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        if (\Yii::$app->user->isGuest) {
+            return $this->actionLogin();
+        } else {
+            return $this->render('index');
+        }
     }
 
     public function actionLogin()

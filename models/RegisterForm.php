@@ -10,7 +10,7 @@ namespace app\models;
 
 use Yii;
 use yii\db\ActiveRecord;
-use yii\helpers\Security;
+use yii\base\Security;
 
 class RegisterForm extends ActiveRecord
 {
@@ -25,6 +25,16 @@ class RegisterForm extends ActiveRecord
 	public static function tableName()
 	{
 		return 'users';
+	}
+
+	public function attributeLabels() {
+		return [
+			'username' => 'Логин',
+			'password' => 'Пароль',
+			'password2' => 'Повторите пароль',
+			'email' => 'Email',
+			'verifyCode' => 'Проверочный код',
+		];
 	}
 
 	public function rules()
@@ -44,8 +54,9 @@ class RegisterForm extends ActiveRecord
 
 	public function register()
 	{
-		$this->auth_key = Security::generateRandomKey();
-		$this->password = Security::generatePasswordHash($this->password);
+		$security = new Security();
+		$this->auth_key = $security->generateRandomString();
+		$this->password = $security->generatePasswordHash($this->password);
 
 		$connection = Yii::$app->db;
 		$command = $connection->createCommand('INSERT INTO users

@@ -1,10 +1,10 @@
 /**
  * Created by maksimtrunov on 20.07.14.
  */
-$(function () {
-	"use strict";
 
-	$('#fileupload').fileupload({
+$(function () {
+
+    $('#fileupload').fileupload({
 		dataType: 'json',
 		autoUpload: false,
 		acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
