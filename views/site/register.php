@@ -13,21 +13,21 @@ use yii\captcha\Captcha;
 $this->title = 'Регистрация';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-	<div class="row margin">
+	<div class="row">
 		<div class="jumbotron">
 			<p>Перейти на страницу аутентификации <?= Html::a('вход', Url::toRoute('login')) ?></p>
 		</div>
 
-		<h1><?= Html::encode($this->title) ?></h1>
+		<h1 class="col-lg-offset-1"><?= Html::encode($this->title) ?></h1>
 
-		<p>Пожалуйста заполните поля для регистрации:</p>
+		<p class="col-lg-offset-1">Пожалуйста заполните поля для регистрации:</p>
 
 		<?php $form = ActiveForm::begin([
 			'id' => 'register',
 			'options' => ['class' => 'form-horizontal'],
 			'fieldConfig' => [
 				'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-				'labelOptions' => ['class' => 'col-lg-1 control-label'],
+				'labelOptions' => ['class' => 'col-lg-2 control-label'],
 			],
 		]); ?>
 
@@ -40,12 +40,12 @@ $this->params['breadcrumbs'][] = $this->title;
 		<?= $form->field($model, 'email') ?>
 
 		<?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-			'template' => '<div class="row"><div class="col-lg-6">{image}</div><div class="col-lg-6">{input}</div></div>',
+			'template' => '<div class="row"><div class="col-lg-6">{input}</div><div class="col-lg-6">{image}</div></div>',
 		]) ?>
 
 
 		<div class="form-group">
-			<div class="col-lg-offset-1 col-lg-11">
+			<div class="col-lg-offset-2">
 				<?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
 			</div>
 		</div>

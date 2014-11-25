@@ -13,14 +13,14 @@ $this->title = 'Аутентификация';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-    <div class="row margin">
+    <div class="row">
 		<div class="jumbotron">
 			<p>Для регистрации нажмите <?= Html::a('регистрация', Url::toRoute('register')) ?></p>
 		</div>
 		<div class="col-lg-12">
-			<h1><?= Html::encode($this->title) ?></h1>
+			<h1 class="col-lg-offset-1"><?= Html::encode($this->title) ?></h1>
 
-			<p>Пожалуйста заполните поля для входа:</p>
+			<p class="col-lg-offset-1">Пожалуйста заполните поля для входа:</p>
 
 			<?php $form = ActiveForm::begin([
 				'id' => 'login-form',
@@ -30,15 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
 					'labelOptions' => ['class' => 'col-lg-2 control-label'],
 				],
 			]); ?>
-
 			<?= $form->field($model, 'username') ?>
-
 			<?= $form->field($model, 'password')->passwordInput() ?>
-
 			<?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-				'template' => '<div class="row"><div class="col-lg-6">{image}</div><div class="col-lg-6">{input}</div></div>',
+				'template' => '<div class="row"><div class="col-lg-6">{input}</div><div class="col-lg-6">{image}</div></div>',
 			]) ?>
-
 			<?= $form->field($model, 'rememberMe', [
 				'template' => "<div class=\"col-lg-offset-3 col-lg-4\">{input}</div>\n<div class=\"col-lg-2\">{error}</div>",
 			])->checkbox() ?>

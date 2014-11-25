@@ -52,6 +52,13 @@ AppAsset::register($this);
 							['label' => 'Register', 'url' => ['/site/register']] : '',
 					],
 				]);
+			} else {
+				echo Nav::widget([
+					'options' => ['class' => 'navbar-nav navbar-right'],
+					'items' => [
+						['label' => 'Контакт', 'url' => ['/site/contact']],
+					],
+				]);
 			}
 
 			NavBar::end();
