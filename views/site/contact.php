@@ -8,7 +8,7 @@ use yii\captcha\Captcha;
  * @var yii\widgets\ActiveForm $form
  * @var app\models\ContactForm $model
  */
-$this->title = 'Contact';
+$this->title = 'Контакт';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-contact">
@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
 						'labelOptions' => ['class' => 'col-lg-2 control-label'],
 					],
 				]); ?>
-					<?= $form->field($model, 'name') ?>
+					<?= $form->field($model, 'name')->enableAjaxValidation ?>
 					<?= $form->field($model, 'email') ?>
 					<?= $form->field($model, 'subject') ?>
 					<?= $form->field($model, 'body')->textArea(['rows' => 6]) ?>
