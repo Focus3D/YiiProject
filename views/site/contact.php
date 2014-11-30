@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
 						'labelOptions' => ['class' => 'col-lg-2 control-label'],
 					],
 				]); ?>
-					<?= $form->field($model, 'name')->enableAjaxValidation ?>
+					<?= $form->field($model, 'name') ?>
 					<?= $form->field($model, 'email') ?>
 					<?= $form->field($model, 'subject') ?>
 					<?= $form->field($model, 'body')->textArea(['rows' => 6]) ?>

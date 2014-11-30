@@ -27,7 +27,8 @@ class RegisterForm extends ActiveRecord
 		return 'users';
 	}
 
-	public function attributeLabels() {
+	public function attributeLabels()
+	{
 		return [
 			'username' => 'Логин',
 			'password' => 'Пароль',
@@ -40,15 +41,14 @@ class RegisterForm extends ActiveRecord
 	public function rules()
 	{
 		return [
-			['id', 'safe'],
-			[['username', 'password', 'password2', 'email'], 'required'],
-			['username', 'string', 'min' => 3, 'max' => 40],
-			['password', 'string', 'min' => 3, 'max' => 30],
-			['password2', 'string', 'min' => 3, 'max' => 30],
-			['email', 'email'],
-			['password', 'compare', 'compareAttribute' => 'password2'],
-			['auth_key', 'safe'],
-			['verifyCode', 'captcha'],
+			[ [ 'username', 'password', 'password2', 'email' ], 'required' ],
+			[ ['username', 'password', 'password2' ], 'string', 'min' => 3, 'max' => 20 ],
+			[ 'email', 'email' ],
+			[ 'password', 'compare', 'compareAttribute' => 'password2' ],
+			[ 'verifyCode', 'captcha' ],
+			[ 'username', 'unique', 'targetAttribute' => 'username' ],
+			[ 'email', 'uniqueAjax', 'targetAttribute' => 'email' ],
+			[ 'username', 'uniqueAjax', 'targetAttribute' => 'username' ],
 		];
 	}
 
@@ -56,10 +56,10 @@ class RegisterForm extends ActiveRecord
 	{
 		$security = new Security();
 		$this->auth_key = $security->generateRandomString();
-		$this->password = $security->generatePasswordHash($this->password);
+		$this->password = $security->generatePasswordHash( $this->password );
 
 		$connection = Yii::$app->db;
-		$command = $connection->createCommand('INSERT INTO users
+		$command = $connection->createCommand( 'INSERT INTO users
 																(username,
 																 password,
 																 email,
@@ -68,18 +68,18 @@ class RegisterForm extends ActiveRecord
 																:password,
 																:email,
 																:auth_key)
-											');
-		$command->bindValues([':username' => $this->username,
-							  ':password' => $this->password,
-							  ':email' => $this->email,
-							  ':auth_key' => $this-> auth_key,
-							]);
+											' );
+		$command->bindValues( [ ':username' => $this->username,
+			':password' => $this->password,
+			':email' => $this->email,
+			':auth_key' => $this->auth_key,
+		] );
 
 		$result = $command->execute();
 
-		if($result && $result > 0) {
-			if($user = User::findByUsername($this->username)) {
-				if(Yii::$app->user->login($user)) {
+		if ( $result && $result > 0 ) {
+			if ( $user = User::findByUsername( $this->username ) ) {
+				if ( Yii::$app->user->login( $user ) ) {
 					return true;
 				}
 			}
