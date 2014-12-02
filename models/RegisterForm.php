@@ -42,13 +42,12 @@ class RegisterForm extends ActiveRecord
 	{
 		return [
 			[ [ 'username', 'password', 'password2', 'email' ], 'required' ],
-			[ ['username', 'password', 'password2' ], 'string', 'min' => 3, 'max' => 20 ],
+			[ ['username', 'password', 'password2' ], 'string', 'min' => 3, 'max' => 30 ],
 			[ 'email', 'email' ],
 			[ 'password', 'compare', 'compareAttribute' => 'password2' ],
 			[ 'verifyCode', 'captcha' ],
 			[ 'username', 'unique', 'targetAttribute' => 'username' ],
-			[ 'email', 'uniqueAjax', 'targetAttribute' => 'email' ],
-			[ 'username', 'uniqueAjax', 'targetAttribute' => 'username' ],
+			[ 'email', 'unique', 'targetAttribute' => 'email' ],
 		];
 	}
 

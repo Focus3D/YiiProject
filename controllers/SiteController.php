@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use app\models\RegisterForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -10,7 +9,7 @@ use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\User;
+use app\models\RegisterForm;
 
 class SiteController extends Controller
 {
@@ -88,16 +87,13 @@ class SiteController extends Controller
 
 	public function actionRegister()
 	{
-		if ( !\Yii::$app->user->isGuest ) {
-			return $this->goHome();
-		}
-
 		$model = new RegisterForm();
 
 		if ( Yii::$app->request->isPost ) {
-			$model->setAttributes( Yii::$app->request->post( 'RegisterForm' ) );
-			if ( $model->register() && $model->validate() ) {
-				$this->redirect( Yii::$app->urlManager->createUrl( 'site/login' ) );
+			if ( $model->load( Yii::$app->request->post( 'RegisterForm' ) ) && $model->validate() ) {
+				if ( $model->register() ) {
+					$this->goHome();
+				}
 			}
 		}
 
