@@ -5,7 +5,7 @@
  * Date: 22.06.14
  * Time: 11:08
  */
-use yii\widgets\Menu;
+
 use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
@@ -13,9 +13,10 @@ use yii\helpers\Html;
 use yii\data\ActiveDataProvider;
 
 $this->title = 'Администрирование';
+$this->params[ 'breadcrumbs' ][ ] = $this->title;
 ?>
 <div class="row">
-	<div class="panel panel-primary">
+	<div class="panel panel-info">
 		<div class="panel-heading">Пользователи
 			<span class="badge pull-right">
 				<?= (isset($count)) ? $count : '' ?>
@@ -50,13 +51,53 @@ $this->title = 'Администрирование';
 </div>
 
 <div class="row">
-	<?php $fileInput = ActiveForm::begin( [
-		'action' => Url::to( [ 'file/save' ] ),
-		'options' => [
-			'enctype' => 'multipart/form-data',
-		]
-	] ); ?>
-	<?= $fileInput->field( $upload, 'file[]' )->fileInput( [ 'multiple' => '', 'class' => 'btn btn-info' ] ); ?>
-	<?= Html::submitButton( 'Сохранить', [ 'class' => 'btn btn-success col-lg-1', 'name' => 'upload' ] ); ?>
-	<?php ActiveForm::end(); ?>
+	<div class="col-lg-4">
+		<?php if ( Yii::$app->session->hasFlash( 'file' ) ) {
+			echo '<div class="alert alert-info" role="alert">'. Yii::$app->session->getFlash('file') . '</div>';
+			Yii::$app->session->removeFlash( 'file' );
+		}?>
+		<div class="panel panel-info">
+			<div class="panel-heading">Загрузка файлов</div>
+			<div class="panel-body">
+				<?php $fileInput = ActiveForm::begin( [
+					'action' => Url::to( [ 'file/save' ] ),
+					'options' => [
+						'enctype' => 'multipart/form-data',
+					]
+				] ); ?>
+				<?= $fileInput->field( $upload, 'file' )->fileInput( [ 'class' => 'btn btn-info' ] ); ?>
+				<?= Html::submitButton( 'Сохранить', [ 'class' => 'btn btn-success', 'name' => 'upload' ] ); ?>
+				<?php ActiveForm::end(); ?>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-4">
+		<?php if ( Yii::$app->session->hasFlash( 'item' ) ) {
+			echo '<div class="alert alert-info" role="alert">'. Yii::$app->session->getFlash('item') . '</div>';
+			Yii::$app->session->removeFlash( 'item' );
+		}?>
+		<div class="panel panel-info">
+			<div class="panel-heading">Создание товара</div>
+			<div class="panel-body">
+				<?php $item = ActiveForm::begin( [
+					'id' => 'commodity',
+					'action' => Url::to( [ 'commodity/save' ] ),
+					'options' => [
+						'enctype' => 'multipart/form-data',
+						'class' => 'form-horizontal',
+					],
+					'fieldConfig' => [
+						'template' => "{label}\n<div class=\"col-lg-8\">{input}</div>\n<br><div class=\"col-lg-12\">{error}</div>",
+						'labelOptions' => ['class' => 'col-lg-4 control-label'],
+					],
+				] ); ?>
+				<?= $item->field( $commodity, 'name' ); ?>
+				<?= $item->field( $commodity, 'quantity' ); ?>
+				<?= $item->field( $commodity, 'cost' ); ?>
+				<?= Html::submitButton( 'Сохранить', [ 'class' => 'btn btn-success col-lg-offset-4', 'name' => 'upload' ] ); ?>
+				<?php ActiveForm::end(); ?>
+			</div>
+		</div>
+	</div>
 </div>

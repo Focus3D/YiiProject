@@ -12,8 +12,8 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\UploadedFile;
 use app\models\UploadForm;
+use app\models\Commodity;
 use app\models\User;
 
 class AdminController extends Controller
@@ -26,6 +26,7 @@ class AdminController extends Controller
 
 	public function actionIndex()
 	{
+		$model = new Commodity();
 		$upload = new UploadForm();
 		$count = User::getCount();
 		$dataProvider = new ActiveDataProvider([
@@ -36,6 +37,7 @@ class AdminController extends Controller
 		]);
 
 		return $this->render('index', [
+			'commodity' => $model,
 			'count' => $count,
 			'upload' => $upload,
 			'dataProvider' => $dataProvider,

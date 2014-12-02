@@ -57,7 +57,7 @@ AppAsset::register($this);
 		<div class="row">
 			<?= Breadcrumbs::widget([
 				'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-				'homeLink' => ['label' => 'Admin panel', 'url' => Url::toRoute('admin')],
+				'homeLink' => ['label' => 'Главная', 'url' => Url::to( [ 'site/index' ] )],
 			]) ?>
 		</div>
 		<?= $content ?>

@@ -23,9 +23,6 @@ class AppAsset extends AssetBundle
 		'css/jquery.fileupload.css',
     ];
     public $js = [
-		'js/jquery.ui.widget.js',
-		'js/jquery.iframe-transport.js',
-		'js/jquery.fileupload.js',
 		'js/script.js',
     ];
     public $depends = [

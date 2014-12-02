@@ -3,3 +3,7 @@ body{
     background-size: cover;
     color: #fff;
 }
+#users,
+form{ color: #000; }
+.background{ background-color: #fff; }
+.padding{ padding: 20px; }

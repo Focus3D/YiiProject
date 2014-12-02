@@ -17,33 +17,19 @@ class FileController extends Controller
 {
 	public function actionSave()
 	{
-		$upload = new UploadForm();
+		$model = new UploadForm();
 
 		if ( Yii::$app->request->isPost ) {
-			$files = UploadedFile::getInstances( $upload, 'file' );
+			$model->file = UploadedFile::getInstance( $model, 'file' );
 
-			foreach ( $files as $file ) {
-
-				$_model = new UploadForm();
-
-				$_model->file = $file;
-
-				if ( $_model->validate() ) {
-					$_model->file->saveAs( Yii::$app->params[ 'uploadFolder' ] . $_model->file->baseName . '.' . $_model->file->extension );
-				} else {
-					foreach ( $_model->getErrors( 'file' ) as $error ) {
-						$upload->addError( 'file', $error );
-					}
-				}
-			}
-
-			if ( $upload->hasErrors( 'file' ) ) {
-				$upload->addError(
-					'file',
-					count( $upload->getErrors( 'file' ) ) . ' of ' . count( $files ) . ' files not uploaded'
-				);
+			if ( $model->validate() ) {
+				$model->file->saveAs( Yii::$app->params['uploadFolder'] . $model->file->baseName . '.' . $model->file->extension );
+				Yii::$app->session->setFlash( 'file', 'Файл успешно сохранен' );
+			} else {
+				Yii::$app->session->setFlash( 'file', print_r( $model->getErrors( 'file' ), true ) );
 			}
 		}
-		$this->goBack(Yii::$app->request->getReferrer());
+
+		$this->goBack( Yii::$app->request->getReferrer() );
 	}
 } 

@@ -24,20 +24,14 @@ class UploadForm extends Model
 	public function rules()
 	{
 		return [
-			[ [ 'file' ],
-				'file',
-				'extensions' => 'gif, jpg',
-				'mimeTypes' => 'image/jpeg, image/png',
-				'skipOnEmpty' => false,
-				'maxFiles' => 100,
-			],
+			[ 'file', 'file', 'extensions' => 'gif, jpg', 'mimeTypes' => 'image/jpeg, image/png', 'skipOnEmpty' => false ],
 		];
 	}
 
 	public function attributeLabels()
 	{
 		return [
-			'file' => 'Загрузка файлов',
+			'file' => 'Файл',
 		];
 	}
 
