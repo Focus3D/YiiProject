@@ -44,10 +44,11 @@ class RegisterForm extends ActiveRecord
 			[ [ 'username', 'password', 'password2', 'email' ], 'required' ],
 			[ ['username', 'password', 'password2' ], 'string', 'min' => 3, 'max' => 30 ],
 			[ 'email', 'email' ],
-			[ 'password', 'compare', 'compareAttribute' => 'password2' ],
+			[ 'password2', 'compare', 'compareAttribute' => 'password' ],
 			[ 'verifyCode', 'captcha' ],
 			[ 'username', 'unique', 'targetAttribute' => 'username' ],
 			[ 'email', 'unique', 'targetAttribute' => 'email' ],
+			[ 'auth_key', 'safe' ],
 		];
 	}
 

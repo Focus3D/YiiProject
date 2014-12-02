@@ -90,7 +90,7 @@ class SiteController extends Controller
 		$model = new RegisterForm();
 
 		if ( Yii::$app->request->isPost ) {
-			if ( $model->load( Yii::$app->request->post( 'RegisterForm' ) ) && $model->validate() ) {
+			if ( $model->load( Yii::$app->request->post() ) && $model->validate() ) {
 				if ( $model->register() ) {
 					$this->goHome();
 				}

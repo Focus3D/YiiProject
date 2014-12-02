@@ -82,8 +82,9 @@ class User extends ActiveRecord implements IdentityInterface
 	{
 		if (parent::beforeSave($insert)) {
 			if ($this->isNewRecord) {
-				$this->auth_key = Security::generateRandomKey();
-				$this->password = Security::generatePasswordHash($this->password);
+				$security = new Security();
+				$this->auth_key = $security->generateRandomKey();
+				$this->password = $security->generatePasswordHash( $this->password );
 			}
 			return true;
 		}
