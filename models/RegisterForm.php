@@ -59,23 +59,12 @@ class RegisterForm extends ActiveRecord
 		$this->password = $security->generatePasswordHash( $this->password );
 
 		$connection = Yii::$app->db;
-		$command = $connection->createCommand( 'INSERT INTO users
-																(username,
-																 password,
-																 email,
-																 auth_key)
-														VALUES (:username,
-																:password,
-																:email,
-																:auth_key)
-											' );
-		$command->bindValues( [ ':username' => $this->username,
-			':password' => $this->password,
-			':email' => $this->email,
-			':auth_key' => $this->auth_key,
-		] );
-
-		$result = $command->execute();
+		$result = $connection->createCommand()->insert( 'users', [
+			'username' => $this->username,
+			'password' => $this->password,
+			'email' => $this->email,
+			'auth_key' => $this->auth_key
+		] )->execute();
 
 		if ( $result && $result > 0 ) {
 			if ( $user = User::findByUsername( $this->username ) ) {
