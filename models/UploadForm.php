@@ -11,7 +11,8 @@ namespace app\models;
 use yii\base\Model;
 use yii\web\UploadedFile;
 
-class UploadForm extends Model {
+class UploadForm extends Model
+{
 	/**
 	 * @var UploadedFile|Null file attribute
 	 */
@@ -23,7 +24,20 @@ class UploadForm extends Model {
 	public function rules()
 	{
 		return [
-			[ 'file' , 'file', 'extensions' => 'gif, jpg', 'mimeTypes' => 'image/jpeg, image/png', 'skipOnEmpty' => false],
+			[ [ 'file' ],
+				'file',
+				'extensions' => 'gif, jpg',
+				'mimeTypes' => 'image/jpeg, image/png',
+				'skipOnEmpty' => false,
+				'maxFiles' => 100,
+			],
+		];
+	}
+
+	public function attributeLabels()
+	{
+		return [
+			'file' => 'Загрузка файлов',
 		];
 	}
 

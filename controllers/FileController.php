@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: maksimtrunov
- * Date: 14.08.14
- * Time: 21:27
+ * User: admin
+ * Date: 02.12.14
+ * Time: 17:05
  */
 
 namespace app\controllers;
@@ -15,13 +15,12 @@ use app\models\UploadForm;
 
 class FileController extends Controller
 {
-
-	public function actionUpload()
+	public function actionSave()
 	{
-		$model = new UploadForm();
+		$upload = new UploadForm();
 
 		if ( Yii::$app->request->isPost ) {
-			$files = UploadedFile::getInstances( $model, 'file' );
+			$files = UploadedFile::getInstances( $upload, 'file' );
 
 			foreach ( $files as $file ) {
 
@@ -33,19 +32,18 @@ class FileController extends Controller
 					$_model->file->saveAs( Yii::$app->params[ 'uploadFolder' ] . $_model->file->baseName . '.' . $_model->file->extension );
 				} else {
 					foreach ( $_model->getErrors( 'file' ) as $error ) {
-						$model->addError( 'file', $error );
+						$upload->addError( 'file', $error );
 					}
 				}
 			}
 
-			if ( $model->hasErrors( 'file' ) ) {
-				$model->addError(
+			if ( $upload->hasErrors( 'file' ) ) {
+				$upload->addError(
 					'file',
-					count( $model->getErrors( 'file' ) ) . ' of ' . count( $files ) . ' files not uploaded'
+					count( $upload->getErrors( 'file' ) ) . ' of ' . count( $files ) . ' files not uploaded'
 				);
 			}
 		}
-		return $this->render( 'upload', [ 'model' => $model ] );
+		$this->goBack(Yii::$app->request->getReferrer());
 	}
-
 } 

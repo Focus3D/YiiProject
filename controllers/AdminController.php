@@ -8,14 +8,13 @@
 
 namespace app\controllers;
 
-use app\models\UploadForm;
-use app\models\User;
 use Yii;
 use yii\data\ActiveDataProvider;
-use yii\db\Query;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use app\models\UploadForm;
+use app\models\User;
 
 class AdminController extends Controller
 {
@@ -27,10 +26,6 @@ class AdminController extends Controller
 
 	public function actionIndex()
 	{
-		if(Yii::$app->user->isGuest) {
-			$this->goHome();
-		}
-
 		$upload = new UploadForm();
 		$count = User::getCount();
 		$dataProvider = new ActiveDataProvider([

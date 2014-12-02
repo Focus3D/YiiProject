@@ -33,7 +33,7 @@ $this->title = 'Администрирование';
 				'caption' => 'Список пользователей',
 				'filterSelector' => 'filter',
 				'filterUrl' => Yii::$app->urlManager->createUrl( 'user/filter' ),
-				'dataProvider' => ( $dataProvider ) ? $dataProvider : null,
+				'dataProvider' => ($dataProvider) ? $dataProvider : null,
 				'columns' => [
 					[ 'class' => 'yii\grid\DataColumn', 'attribute' => 'id', ],
 					[ 'class' => 'yii\grid\DataColumn', 'attribute' => 'username', 'label' => 'Логин' ],
@@ -51,12 +51,12 @@ $this->title = 'Администрирование';
 
 <div class="row">
 	<?php $fileInput = ActiveForm::begin( [
-		'action' => Url::to( ['file/upload'] ),
+		'action' => Url::to( [ 'file/save' ] ),
 		'options' => [
 			'enctype' => 'multipart/form-data',
 		]
 	] ); ?>
-	<?= $fileInput->field( $upload, 'file[]' )->fileInput( [ 'multiple' => '' ] ); ?>
-	<?= Html::submitButton( 'Сохранить', [ 'class' => 'btn btn-primary col-lg-2', 'name' => 'upload' ] ); ?>
+	<?= $fileInput->field( $upload, 'file[]' )->fileInput( [ 'multiple' => '', 'class' => 'btn btn-info' ] ); ?>
+	<?= Html::submitButton( 'Сохранить', [ 'class' => 'btn btn-success col-lg-1', 'name' => 'upload' ] ); ?>
 	<?php ActiveForm::end(); ?>
 </div>
