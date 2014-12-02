@@ -10,26 +10,42 @@ namespace app\controllers;
 
 use Yii;
 use yii\web\Controller;
+use yii\web\UploadedFile;
+use app\models\UploadForm;
 
-class FileController extends Controller{
-
-	public $enableCsrfValidation = false;
-
-	public function actionSave()
-	{
-		if(Yii::$app->request->isAjax) {
-			if(!empty($_FILES)) {
-				foreach ($_FILES as $file) {
-					if ($file['error'][0] == 0 && move_uploaded_file($file['tmp_name'][0], Yii::$app->basePath . '/upload/' . $file['name'][0])) {
-						return $this->renderAjax('save', ['status' => 'ok']);
-					}
-				}
-			}
-		} else return $this->renderAjax('save', ['status' => 'error']);
-	}
+class FileController extends Controller
+{
 
 	public function actionUpload()
 	{
-		return $this->render('upload');
+		$model = new UploadForm();
+
+		if ( Yii::$app->request->isPost ) {
+			$files = UploadedFile::getInstances( $model, 'file' );
+
+			foreach ( $files as $file ) {
+
+				$_model = new UploadForm();
+
+				$_model->file = $file;
+
+				if ( $_model->validate() ) {
+					$_model->file->saveAs( Yii::$app->params[ 'uploadFolder' ] . $_model->file->baseName . '.' . $_model->file->extension );
+				} else {
+					foreach ( $_model->getErrors( 'file' ) as $error ) {
+						$model->addError( 'file', $error );
+					}
+				}
+			}
+
+			if ( $model->hasErrors( 'file' ) ) {
+				$model->addError(
+					'file',
+					count( $model->getErrors( 'file' ) ) . ' of ' . count( $files ) . ' files not uploaded'
+				);
+			}
+		}
+		return $this->render( 'upload', [ 'model' => $model ] );
 	}
+
 } 

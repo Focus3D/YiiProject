@@ -56,7 +56,7 @@ class LoginForm extends Model
 	{
 		$user = $this->getUser();
 		if ( $user instanceof User ) {
-			return Yii::$app->security->validatePassword( $password, $this->password );
+			return Yii::$app->security->validatePassword( $this->password, $user->password );
 		} else {
 			$this->addError( 'username', 'Пользователя с таким логином не существует.' );
 			return false;

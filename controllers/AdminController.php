@@ -8,6 +8,7 @@
 
 namespace app\controllers;
 
+use app\models\UploadForm;
 use app\models\User;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -30,6 +31,7 @@ class AdminController extends Controller
 			$this->goHome();
 		}
 
+		$upload = new UploadForm();
 		$count = User::getCount();
 		$dataProvider = new ActiveDataProvider([
 			'query' => User::find(),
@@ -40,6 +42,7 @@ class AdminController extends Controller
 
 		return $this->render('index', [
 			'count' => $count,
+			'upload' => $upload,
 			'dataProvider' => $dataProvider,
 		]);
 	}
