@@ -10,13 +10,15 @@ namespace app\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yii\web\UploadedFile;
+use app\models\Image;
 
 class Commodity extends ActiveRecord
 {
 	public $id;
 	public $name;
 	public $cost;
-	//public $photo;
+	public $image;
 	public $quantity;
 
 	public static function tableName()
@@ -38,7 +40,6 @@ class Commodity extends ActiveRecord
 			'name' => 'Название товара',
 			'cost' => 'Стоимость',
 			'quantity' => 'Количество',
-			//'photo' => 'Фото',
 		];
 	}
 
@@ -50,24 +51,29 @@ class Commodity extends ActiveRecord
 			[ 'quantity', 'integer' ],
 			[ 'cost', 'integer' ],
 			[ 'id', 'safe' ],
-			//[ 'photo', 'file', 'extensions' => 'gif, jpg', 'mimeTypes' => 'image/jpeg, image/png' ],
+			[ 'image', 'safe' ],
 		];
 	}
 
-	public function saveItem()
+	public function saveItem( $imageID )
 	{
 		$connection = Yii::$app->db;
+
 		$result = $connection->
 			createCommand()->
 			insert(
 				$this->tableName(),
 				[   'name' => $this->name,
 					'cost' => $this->cost,
-					'quantity' => $this->quantity ]
+					'quantity' => $this->quantity,
+					'photo_id' => $imageID,
+				]
 			)->execute();
 
 		if ( $result ) {
 			return true;
-		} else { return false; }
+		} else {
+			return false;
+		}
 	}
 } 

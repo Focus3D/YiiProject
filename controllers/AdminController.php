@@ -12,22 +12,24 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use app\models\UploadForm;
+use yii\web\UploadedFile;
+use app\models\Image;
 use app\models\Commodity;
 use app\models\User;
 
 class AdminController extends Controller
 {
-	public function beforeAction($action) {
+	public function beforeAction( $action )
+	{
 		$this->layout = 'admin';
-		parent::beforeAction($action);
+		parent::beforeAction( $action );
 		return true;
 	}
 
 	public function actionIndex()
 	{
 		$model = new Commodity();
-		$upload = new UploadForm();
+		$image = new Image();
 		$count = User::getCount();
 		$dataProvider = new ActiveDataProvider([
 			'query' => User::find(),
@@ -36,12 +38,28 @@ class AdminController extends Controller
 			],
 		]);
 
-		return $this->render('index', [
+		if ( Yii::$app->request->isPost ) {
+			$file = null;
+			$image->image = UploadedFile::getInstance( $image, 'image' );
+			$path = Yii::$app->params[ 'uploadFolder' ] . $model->image->baseName . '.' . $model->image->extension;
+
+			if ( $image->validate() && $image->image->saveAs( $path ) ) {
+				$id = $image->saveImageInfo($path);
+
+				if ( $id ) {
+					if ( $model->load( Yii::$app->request->post() ) && $model->validate() ) {
+						$model->saveItem( $id );
+					}
+				}
+			}
+		}
+
+		return $this->render( 'index', [
 			'commodity' => $model,
 			'count' => $count,
-			'upload' => $upload,
+			'image' => $image,
 			'dataProvider' => $dataProvider,
-		]);
+		] );
 	}
 
 } 

@@ -51,7 +51,7 @@ $this->params[ 'breadcrumbs' ][ ] = $this->title;
 </div>
 
 <div class="row">
-	<div class="col-lg-4">
+	<!--div class="col-lg-4">
 		<?php if ( Yii::$app->session->hasFlash( 'file' ) ) {
 			echo '<div class="alert alert-info" role="alert">'. Yii::$app->session->getFlash('file') . '</div>';
 			Yii::$app->session->removeFlash( 'file' );
@@ -60,29 +60,34 @@ $this->params[ 'breadcrumbs' ][ ] = $this->title;
 			<div class="panel-heading">Загрузка файлов</div>
 			<div class="panel-body">
 				<?php $fileInput = ActiveForm::begin( [
-					'action' => Url::to( [ 'file/save' ] ),
+					'id' => 'image',
+					'action' => Url::to( [ 'image/add' ] ),
 					'options' => [
 						'enctype' => 'multipart/form-data',
 					]
 				] ); ?>
-				<?= $fileInput->field( $upload, 'file' )->fileInput( [ 'class' => 'btn btn-info' ] ); ?>
-				<?= Html::submitButton( 'Сохранить', [ 'class' => 'btn btn-success', 'name' => 'upload' ] ); ?>
+				<?= $fileInput->field( $image, 'image' )->fileInput( [ 'class' => 'btn btn-info' ] ); ?>
+				<?= Html::submitButton( 'Сохранить', [ 'class' => 'btn btn-success' ] ); ?>
 				<?php ActiveForm::end(); ?>
 			</div>
 		</div>
-	</div>
+	</div-->
 
 	<div class="col-lg-4">
-		<?php if ( Yii::$app->session->hasFlash( 'item' ) ) {
-			echo '<div class="alert alert-info" role="alert">'. Yii::$app->session->getFlash('item') . '</div>';
-			Yii::$app->session->removeFlash( 'item' );
+		<?php if ( Yii::$app->session->hasFlash( 'model' ) ) {
+			echo '<div class="alert alert-info" role="alert">'. Yii::$app->session->getFlash('model') . '</div>';
+			Yii::$app->session->removeFlash( 'model' );
+		}?>
+		<?php if ( Yii::$app->session->hasFlash( 'image' ) ) {
+			echo '<div class="alert alert-info" role="alert">'. Yii::$app->session->getFlash('image') . '</div>';
+			Yii::$app->session->removeFlash( 'image' );
 		}?>
 		<div class="panel panel-info">
 			<div class="panel-heading">Создание товара</div>
 			<div class="panel-body">
 				<?php $item = ActiveForm::begin( [
 					'id' => 'commodity',
-					'action' => Url::to( [ 'commodity/save' ] ),
+					'action' => Url::to( [ 'admin/index' ] ),
 					'options' => [
 						'enctype' => 'multipart/form-data',
 						'class' => 'form-horizontal',
@@ -95,7 +100,8 @@ $this->params[ 'breadcrumbs' ][ ] = $this->title;
 				<?= $item->field( $commodity, 'name' ); ?>
 				<?= $item->field( $commodity, 'quantity' ); ?>
 				<?= $item->field( $commodity, 'cost' ); ?>
-				<?= Html::submitButton( 'Сохранить', [ 'class' => 'btn btn-success col-lg-offset-4', 'name' => 'upload' ] ); ?>
+				<?= $item->field( $image, 'image' )->fileInput( [ 'name' => 'image' ] ); ?>
+				<?= Html::submitButton( 'Сохранить', [ 'class' => 'btn btn-success col-lg-offset-4' ] ); ?>
 				<?php ActiveForm::end(); ?>
 			</div>
 		</div>
