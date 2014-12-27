@@ -19,6 +19,7 @@ class File extends ActiveRecord
 	 * @var UploadedFile|Null file attribute
 	 */
 	public $image;
+	private $filePath = '/Volumes/Warehouse/WebWarehouse/Sharing';
 
 	/**
 	 * @return string table name in database

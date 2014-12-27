@@ -8,7 +8,7 @@ use yii\grid\GridView;
  * @var yii\widgets\ActiveForm $form
  * @var app\models\LoginForm $model
  */
-$this->title = 'Общая папка';
+$this->title = 'Файлы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -16,8 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div class="col-lg-12">
 			<table class="table table-hover">
 				<?php
-				foreach ( $files as $file) {
-					echo "<tr class='active'><td>$file</td></tr>";
+				foreach ( $files as $fileName) {
+					echo "<tr class='active'><td>$fileName</td></tr>";
 				}
 				?>
 			</table>

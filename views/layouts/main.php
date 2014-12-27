@@ -43,13 +43,13 @@ AppAsset::register($this);
 					'items' => [
 						['label' => 'Home', 'url' => ['/site/index']],
 						['label' => 'About', 'url' => ['/site/about']],
-						['label' => 'Contact', 'url' => ['/site/contact']],
-						['label' => 'File Upload', 'url' => ['/file/upload']],
+						['label' => 'Контакт', 'url' => ['/site/contact']],
+						['label' => 'Файлы', 'url' => ['/file/index']],
 						(Yii::$app->user->identity->username === 'admin') ?
-							['label' => 'Admin', 'url' => ['/admin/index']] : '',
-						['label' => 'Logout (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'get']],
+							['label' => 'Admin panel', 'url' => ['/admin/index']] : '',
+						['label' => 'Выйти (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'get']],
 						(Yii::$app->user->isGuest) ?
-							['label' => 'Register', 'url' => ['/site/register']] : '',
+							['label' => 'Регистрация', 'url' => ['/site/register']] : '',
 					],
 				]);
 			} else {
@@ -57,7 +57,7 @@ AppAsset::register($this);
 					'options' => ['class' => 'navbar-nav navbar-right'],
 					'items' => [
 						['label' => 'Контакт', 'url' => ['/site/contact']],
-						['label' => 'Скачать', 'url' => ['/file/sharing']],
+						['label' => 'Файлы', 'url' => ['/file/index']],
 					],
 				]);
 			}
