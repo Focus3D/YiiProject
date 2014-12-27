@@ -29,6 +29,20 @@ class File extends ActiveRecord
 		return 'files';
 	}
 
+	public function getSharedFiles()
+	{
+		$files = [];
+
+		$files = scandir($this->filePath);
+
+		foreach ($files as $i => $file) {
+			if (preg_match('/^\./', $file) || !strlen($file)) {
+				unset($files[$i]);
+			}
+		}
+
+		return $files;
+	}
 	/**
 	 * @return array the validation rules.
 	 */

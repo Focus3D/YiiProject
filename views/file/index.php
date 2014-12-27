@@ -12,14 +12,8 @@ $this->title = 'Файлы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-    <div class="row">
-		<div class="col-lg-12">
-			<table class="table table-hover">
-				<?php
-				foreach ( $files as $fileName) {
-					echo "<tr class='active'><td>$fileName</td></tr>";
-				}
-				?>
-			</table>
-		</div>
-    </div>
+<?= print_r($files, true) ?>
+
+<? GridView::begin([
+
+]) ?>

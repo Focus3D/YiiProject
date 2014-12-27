@@ -42,7 +42,7 @@ class FileController extends Controller
 	public function actionIndex()
 	{
 		$model = new File();
-		$files = scandir($this->sharingPath);
+		$files = $model->getSharedFiles();
 
 		return $this->render( 'index', [
 			'files' => $files,
