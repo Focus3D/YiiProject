@@ -14,6 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= print_r($files, true) ?>
 
-<? GridView::begin([
+<? /*GridView::begin([
 
-]) ?>
+]) */?>

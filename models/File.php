@@ -18,8 +18,8 @@ class File extends ActiveRecord
 	/**
 	 * @var UploadedFile|Null file attribute
 	 */
-	public $image;
-	private $filePath = '/Volumes/Warehouse/WebWarehouse/Sharing';
+	public $file;
+	private $filePath = '/Volumes/Warehouse/WebWarehouse/Sharing/';
 
 	/**
 	 * @return string table name in database
@@ -27,6 +27,11 @@ class File extends ActiveRecord
 	public static function tableName()
 	{
 		return 'files';
+	}
+
+	public function saveFile()
+	{
+
 	}
 
 	public function getSharedFiles()
@@ -43,31 +48,33 @@ class File extends ActiveRecord
 
 		return $files;
 	}
+
 	/**
 	 * @return array the validation rules.
 	 */
 	public function rules()
 	{
 		return [
-			[ 'file', 'image', 'extensions' => 'png, jpg, jpeg', 'on' => 'image'],
+			['file', 'image', 'extensions' => 'png, jpg, jpeg', 'on' => 'image'],
+			['file', 'file', 'on' => 'file'],
 		];
 	}
 
 	public function attributeLabels()
 	{
 		return [
-			'image' => 'Изображение',
+			'file' => 'Файл',
 		];
 	}
 
-	public function findByID( $id )
+	public function findByID($id)
 	{
-		return parent::find( [ 'id' => $id ] );
+		return parent::find(['id' => $id]);
 	}
 
-	public function findByTempName( $tmpName )
+	public function findByTempName($tmpName)
 	{
-		return parent::find( [ 'tmp_name' => $tmpName ] )->asArray();
+		return parent::find(['tmp_name' => $tmpName])->asArray();
 	}
 
 	/**
@@ -75,28 +82,28 @@ class File extends ActiveRecord
 	 *
 	 * @return bool|int идентификатор сохраненного изображения или false - в случаи ошибки
 	 */
-	public function saveImageInfo( $path )
+	public function saveImageInfo($path)
 	{
-		if ( $this->image instanceof UploadedFile ) {
+		if ($this->image instanceof UploadedFile) {
 			$connection = Yii::$app->db;
 
 			$result = $connection
 				->createCommand()
-				->insert( $this->tableName(), [
+				->insert($this->tableName(), [
 					'src' => $path,
 					'name' => $this->image->baseName,
 					'tmp_name' => $this->image->tmpName,
 					'type' => $this->image->type,
 					'size' => $this->image->size,
-				] )
+				])
 				->execute();
-			if ( $result ) {
-				return intval( $connection->getLastInsertID() );
+			if ($result) {
+				return intval($connection->getLastInsertID());
 			} else {
 				return false;
 			}
 		} else {
-			throw new UnknownPropertyException( $this->image );
+			throw new UnknownPropertyException($this->image);
 		}
 	}
 

@@ -14,7 +14,7 @@ $this->title = 'Регистрация';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 	<div class="row">
-		<div class="jumbotron orange">
+		<div class="jumbotron green">
 			<p>Перейти на страницу аутентификации <?= Html::a('вход', Url::toRoute('login')) ?></p>
 		</div>
 
