@@ -13,7 +13,7 @@ use yii\base\UnknownPropertyException;
 use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
 
-class Image extends ActiveRecord
+class File extends ActiveRecord
 {
 	/**
 	 * @var UploadedFile|Null file attribute
@@ -25,7 +25,7 @@ class Image extends ActiveRecord
 	 */
 	public static function tableName()
 	{
-		return 'images';
+		return 'files';
 	}
 
 	/**
@@ -34,15 +34,7 @@ class Image extends ActiveRecord
 	public function rules()
 	{
 		return [
-			[ 'image',
-				'image',
-				'extensions' => 'png, jpg',
-				'minWidth' => 100,
-				'maxWidth' => 1000,
-				'minHeight' => 100,
-				'maxHeight' => 1000,
-				'maxFiles' => 5,
-			],
+			[ 'file', 'image', 'extensions' => 'png, jpg, jpeg', 'on' => 'image'],
 		];
 	}
 

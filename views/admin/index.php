@@ -66,7 +66,7 @@ $this->params[ 'breadcrumbs' ][ ] = $this->title;
 						'enctype' => 'multipart/form-data',
 					]
 				] ); ?>
-				<?= $fileInput->field( $image, 'image' )->fileInput( [ 'class' => 'btn btn-info' ] ); ?>
+				<?= $fileInput->field( $file, 'image' )->fileInput( [ 'class' => 'btn btn-info' ] ); ?>
 				<?= Html::submitButton( 'Сохранить', [ 'class' => 'btn btn-success' ] ); ?>
 				<?php ActiveForm::end(); ?>
 			</div>
@@ -100,7 +100,7 @@ $this->params[ 'breadcrumbs' ][ ] = $this->title;
 				<?= $item->field( $commodity, 'name' ); ?>
 				<?= $item->field( $commodity, 'quantity' ); ?>
 				<?= $item->field( $commodity, 'cost' ); ?>
-				<?= $item->field( $image, 'image' )->fileInput( [ 'name' => 'image' ] ); ?>
+				<?= $item->field( $file, 'image' )->fileInput( [ 'name' => 'image' ] ); ?>
 				<?= Html::submitButton( 'Сохранить', [ 'class' => 'btn btn-success col-lg-offset-4' ] ); ?>
 				<?php ActiveForm::end(); ?>
 			</div>

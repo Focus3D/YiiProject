@@ -11,25 +11,18 @@ namespace app\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\web\UploadedFile;
-use app\models\UploadForm;
 
 class FileController extends Controller
 {
-	public function actionSave()
+	public $sharingPath = '/Volumes/Warehouse/WebWarehouse/Sharing';
+
+	public function actionSharing()
 	{
-		$model = new UploadForm();
+		$files = scandir($this->sharingPath);
 
-		if ( Yii::$app->request->isPost ) {
-			$model->file = UploadedFile::getInstance( $model, 'file' );
-
-			if ( $model->validate() ) {
-				$model->file->saveAs( Yii::$app->params['uploadFolder'] . $model->file->baseName . '.' . $model->file->extension );
-				Yii::$app->session->setFlash( 'file', 'Файл успешно сохранен' );
-			} else {
-				Yii::$app->session->setFlash( 'file', print_r( $model->getErrors( 'file' ), true ) );
-			}
-		}
-
-		$this->goBack( Yii::$app->request->getReferrer() );
+		return $this->render( 'sharing', [
+			'files' => $files,
+			'path' => $this->sharingPath,
+		] );
 	}
 } 

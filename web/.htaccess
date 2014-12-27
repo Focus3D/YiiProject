@@ -6,5 +6,5 @@ RewriteCond %{REQUEST_FILENAME} !-d
 # Otherwise forward the request to index.php
 RewriteRule . index.php
 
-RewriteCond %{REMOTE_ADDR} !=127.0.0.1
+RewriteCond %{REMOTE_ADDR} !=77.120.128.77
 RewriteRule . construct.php

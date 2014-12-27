@@ -57,6 +57,7 @@ AppAsset::register($this);
 					'options' => ['class' => 'navbar-nav navbar-right'],
 					'items' => [
 						['label' => 'Контакт', 'url' => ['/site/contact']],
+						['label' => 'Скачать', 'url' => ['/file/sharing']],
 					],
 				]);
 			}

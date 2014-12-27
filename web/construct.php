@@ -21,6 +21,7 @@
 	<div class="jumbotron">
 		<h1>Сайт находиться в стадии разработки.</h1>
 	</div>
+	<?= $_SERVER['REMOTE_ADDR'] ?>
 </div>
 </body>
 </html>

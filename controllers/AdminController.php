@@ -13,7 +13,7 @@ use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\UploadedFile;
-use app\models\Image;
+use app\models\File;
 use app\models\Commodity;
 use app\models\User;
 
@@ -29,7 +29,7 @@ class AdminController extends Controller
 	public function actionIndex()
 	{
 		$model = new Commodity();
-		$image = new Image();
+		$file = new File(['scenario' => 'image']);
 		$count = User::getCount();
 		$dataProvider = new ActiveDataProvider([
 			'query' => User::find(),
@@ -39,25 +39,18 @@ class AdminController extends Controller
 		]);
 
 		if ( Yii::$app->request->isPost ) {
-			$file = null;
-			$image->image = UploadedFile::getInstance( $image, 'image' );
-			$path = Yii::$app->params[ 'uploadFolder' ] . $model->image->baseName . '.' . $model->image->extension;
-
-			if ( $image->validate() && $image->image->saveAs( $path ) ) {
-				$id = $image->saveImageInfo($path);
-
-				if ( $id ) {
-					if ( $model->load( Yii::$app->request->post() ) && $model->validate() ) {
-						$model->saveItem( $id );
-					}
-				}
+			if ( $model->load( Yii::$app->request->post('Commodity') ) && $model->validate() ) {
+				$model->save();
+			}
+			if ( $file->load( Yii::$app->request->post('Files') ) && $file->validate() ) {
+				$file->save();
 			}
 		}
 
 		return $this->render( 'index', [
 			'commodity' => $model,
 			'count' => $count,
-			'image' => $image,
+			'file' => $file,
 			'dataProvider' => $dataProvider,
 		] );
 	}

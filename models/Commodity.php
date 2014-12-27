@@ -55,7 +55,7 @@ class Commodity extends ActiveRecord
 		];
 	}
 
-	public function saveItem( $imageID )
+	public function saveItem()
 	{
 		$connection = Yii::$app->db;
 
