@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
     <div class="row">
-		<div class="jumbotron">
+		<div class="jumbotron green">
 			<p>Для регистрации нажмите <?= Html::a('регистрация', Url::toRoute('register')) ?></p>
 		</div>
 		<div class="col-lg-12">
@@ -31,15 +31,15 @@ $this->params['breadcrumbs'][] = $this->title;
 			]); ?>
 			<?= $form->field($model, 'username')->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
 			<?= $form->field($model, 'password')->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
-			<?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+			<?= $form->field($model, 'verifyCode')->textInput(['placeholder' => $model->getAttributeLabel('verifyCode')])->widget(Captcha::className(), [
 				'template' => '<div class="row"><div class="col-lg-6">{input}</div><div class="col-lg-6">{image}</div></div>',
 			]) ?>
 			<?= $form->field($model, 'rememberMe', [
-				'template' => "<div class=\"col-lg-offset-3 col-lg-4\">{input}</div>\n<div class=\"col-lg-2\">{error}</div>",
+				'template' => "<div class=\"col-lg-offset-1 col-lg-6\">{input}</div>\n<div class=\"col-lg-6\">{error}</div>",
 			])->checkbox() ?>
 
 			<div class="form-group">
-				<div class="col-lg-offset-3">
+				<div class="col-lg-offset-1">
 					<?= Html::submitButton('Вход', ['class' => 'btn btn-primary col-lg-2', 'name' => 'login-button']) ?>
 				</div>
 			</div>

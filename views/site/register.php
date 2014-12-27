@@ -14,30 +14,30 @@ $this->title = 'Регистрация';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 	<div class="row">
-		<div class="jumbotron">
+		<div class="jumbotron orange">
 			<p>Перейти на страницу аутентификации <?= Html::a('вход', Url::toRoute('login')) ?></p>
 		</div>
 
-		<h1 class="col-lg-offset-1"><?= Html::encode($this->title) ?></h1>
+		<h1><?= Html::encode($this->title) ?></h1>
 
-		<p class="col-lg-offset-1">Пожалуйста заполните поля для регистрации:</p>
+		<p>Пожалуйста заполните поля для регистрации:</p>
 
 		<?php $form = ActiveForm::begin([
 			'id' => 'register',
 			'options' => ['class' => 'form-horizontal'],
 			'fieldConfig' => [
-				'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-6\">{error}</div>",
+				'template' => "<div class=\"col-lg-6\">{input}</div>\n<div class=\"col-lg-6\">{error}</div>",
 				'labelOptions' => ['class' => 'col-lg-2 control-label'],
 			],
 		]); ?>
 
-		<?= $form->field($model, 'username') ?>
+		<?= $form->field($model, 'username')->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
 
-		<?= $form->field($model, 'password')->passwordInput() ?>
+		<?= $form->field($model, 'password')->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
 
-		<?= $form->field($model, 'password2')->passwordInput() ?>
+		<?= $form->field($model, 'password2')->passwordInput(['placeholder' => $model->getAttributeLabel('password2')]) ?>
 
-		<?= $form->field($model, 'email') ?>
+		<?= $form->field($model, 'email')->textInput(['placeholder' => $model->getAttributeLabel('email')]) ?>
 
 		<?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
 			'template' => '<div class="row"><div class="col-lg-6">{input}</div><div class="col-lg-6">{image}</div></div>',
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 		<div class="form-group">
-			<div class="col-lg-offset-2">
+			<div class="col-lg-offset-1">
 				<?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
 			</div>
 		</div>

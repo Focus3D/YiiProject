@@ -7,3 +7,9 @@ body{
 form{ color: #000; }
 .background{ background-color: #fff; }
 .padding{ padding: 20px; }
+.green {
+    background-color: #006400;
+}
+.breadcrumb {
+    background-color: #B0E0E6;
+}
