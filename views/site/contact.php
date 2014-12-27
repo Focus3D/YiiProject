@@ -29,8 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php else: ?>
-		<h1 class="col-lg-offset-1">Форма обратной связи</h1>
-		<p class="col-lg-offset-1">
+		<h1>Форма обратной связи</h1>
+		<p>
 			Если у вас есть деловое предложение или другие вопросы, пожалуйста, заполните следующую форму, чтобы связаться с нами. Спасибо.
 		</p>
 
@@ -40,14 +40,13 @@ $this->params['breadcrumbs'][] = $this->title;
 					'id' => 'contact',
 					'options' => ['class' => 'form-horizontal'],
 					'fieldConfig' => [
-						'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-3\">{error}</div>",
-						'labelOptions' => ['class' => 'col-lg-2 control-label'],
+						'template' => "<div class=\"col-lg-6\">{input}</div>\n<div class=\"col-lg-3\">{error}</div>",
 					],
 				]); ?>
-					<?= $form->field($model, 'name') ?>
-					<?= $form->field($model, 'email') ?>
-					<?= $form->field($model, 'subject') ?>
-					<?= $form->field($model, 'body')->textArea(['rows' => 6]) ?>
+					<?= $form->field($model, 'name')->textInput(['placeholder' => $model->getAttributeLabel('name')]) ?>
+					<?= $form->field($model, 'email')->textInput(['placeholder' => $model->getAttributeLabel('email')]) ?>
+					<?= $form->field($model, 'subject')->textInput(['placeholder' => $model->getAttributeLabel('subject')]) ?>
+					<?= $form->field($model, 'body')->textArea(['rows' => 6, 'placeholder' => $model->getAttributeLabel('body')]) ?>
 					<?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
 						'template' => '<div class="row"><div class="col-lg-6">{input}</div><div class="col-lg-6">{image}</div></div>',
 					]) ?>

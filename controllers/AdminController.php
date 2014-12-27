@@ -19,6 +19,22 @@ use app\models\User;
 
 class AdminController extends Controller
 {
+	public function behaviors()
+	{
+		return [
+			'access' => [
+				'class' => AccessControl::className(),
+				'only' => [],
+				'rules' => [
+					[
+						'allow' => true,
+						'ips' => ['77.120.128.77', '127.0.0.1'],
+					],
+				],
+			],
+		];
+	}
+
 	public function beforeAction( $action )
 	{
 		$this->layout = 'admin';

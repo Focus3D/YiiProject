@@ -19,19 +19,22 @@ class SiteController extends Controller
 		return [
 			'access' => [
 				'class' => AccessControl::className(),
-				'only' => [ 'logout' ],
+				'only' => ['logout', 'index'],
 				'rules' => [
 					[
-						'actions' => [ 'logout' ],
 						'allow' => true,
-						'roles' => [ '@' ],
+						'roles' => ['@'],
+					],
+					[
+						'allow' => true,
+						'roles' => ['@']
 					],
 				],
 			],
 			'verbs' => [
 				'class' => VerbFilter::className(),
 				'actions' => [
-					'logout' => [ 'get' ],
+					'logout' => ['get'],
 				],
 			],
 		];
@@ -52,36 +55,36 @@ class SiteController extends Controller
 
 	public function actionPhpinfo()
 	{
-		return $this->render( 'phpinfo' );
+		return $this->render('phpinfo');
 	}
 
 	public function actionIndex()
 	{
-		if ( \Yii::$app->user->isGuest ) {
+		if (\Yii::$app->user->isGuest) {
 			return $this->actionLogin();
 		} else {
-			return $this->render( 'index' );
+			return $this->render('index');
 		}
 	}
 
 	public function actionLogin()
 	{
-		if ( !\Yii::$app->user->isGuest ) {
+		if (!\Yii::$app->user->isGuest) {
 			return $this->goHome();
 		}
 
 		$model = new LoginForm();
 
-		if ( Yii::$app->request->isPost ) {
-			$model->setAttributes( Yii::$app->request->post( 'LoginForm' ) );
-			if ( $model->login() ) {
+		if (Yii::$app->request->isPost) {
+			$model->setAttributes(Yii::$app->request->post('LoginForm'));
+			if ($model->login()) {
 				$this->goBack();
 			}
 		}
 
-		return $this->render( 'login', [
+		return $this->render('login', [
 			'model' => $model,
-		] );
+		]);
 
 	}
 
@@ -89,18 +92,18 @@ class SiteController extends Controller
 	{
 		$model = new RegisterForm();
 
-		if ( Yii::$app->request->isPost ) {
-			if ( $model->load( Yii::$app->request->post() ) && $model->validate() ) {
-				if ( $model->register() ) {
+		if (Yii::$app->request->isPost) {
+			if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+				if ($model->register()) {
 					$this->goHome();
 				}
 			}
 		}
 
-		return $this->render( 'register', [
+		return $this->render('register', [
 			'model' => $model,
-			'post' => Yii::$app->request->post( 'RegisterForm' ),
-		] );
+			'post' => Yii::$app->request->post('RegisterForm'),
+		]);
 	}
 
 	public function actionLogout()
@@ -113,20 +116,20 @@ class SiteController extends Controller
 	public function actionContact()
 	{
 		$model = new ContactForm();
-		if ( $model->load( Yii::$app->request->post() ) && $model->contact( Yii::$app->params[ 'adminEmail' ] ) ) {
+		if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
 
-			Yii::$app->session->setFlash( 'contactFormSubmitted' );
+			Yii::$app->session->setFlash('contactFormSubmitted');
 
 			return $this->refresh();
 		} else {
-			return $this->render( 'contact', [
+			return $this->render('contact', [
 				'model' => $model,
-			] );
+			]);
 		}
 	}
 
 	public function actionAbout()
 	{
-		return $this->render( 'about' );
+		return $this->render('about');
 	}
 }
