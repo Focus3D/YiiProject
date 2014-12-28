@@ -20,6 +20,7 @@ class File extends ActiveRecord
 	 */
 	public $file;
 	private $filePath = '/Volumes/Warehouse/WebWarehouse/Sharing/';
+	public $savePath = '/Volumes/Warehouse/WebWarehouse/Upload/';
 
 	/**
 	 * @return string table name in database
@@ -27,11 +28,6 @@ class File extends ActiveRecord
 	public static function tableName()
 	{
 		return 'files';
-	}
-
-	public function saveFile()
-	{
-
 	}
 
 	public function getSharedFiles()
@@ -55,8 +51,7 @@ class File extends ActiveRecord
 	public function rules()
 	{
 		return [
-			['file', 'image', 'extensions' => 'png, jpg, jpeg', 'on' => 'image'],
-			['file', 'file', 'on' => 'file'],
+			['file', 'file', 'skipOnEmpty' => false],
 		];
 	}
 

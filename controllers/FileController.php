@@ -9,6 +9,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 use yii\filters\AccessControl;
@@ -25,12 +26,8 @@ class FileController extends Controller
 				'rules' => [
 					// deny all POST requests
 					[
-						'allow' => false,
-						'verbs' => ['POST']
-					],
-					// allow authenticated users
-					[
 						'allow' => true,
+						'verbs' => ['POST', 'GET'],
 						'roles' => ['@'],
 					],
 					// everything else is denied
@@ -46,6 +43,24 @@ class FileController extends Controller
 
 		return $this->render( 'index', [
 			'files' => $files,
+			'model' => $model
 		] );
+	}
+
+	public function actionAdd()
+	{
+		if (Yii::$app->request->isPost) {
+			$model = new File();
+			$model->file = UploadedFile::getInstance($model, 'file');
+
+			if ($model->file && $model->validate()) {
+				$model->file->saveAs($model->savePath . $model->file->baseName . '.' . $model->file->extension);
+				Yii::$app->session->setFlash('file', 'Файл успешно сохранен.');
+			} else {
+				Yii::$app->session->setFlash('file', 'Ошибка сохранения файла.');
+			}
+
+			$this->redirect(Url::to(['file/index']));
+		}
 	}
 } 
