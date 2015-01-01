@@ -1,0 +1,118 @@
+html,body {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    top: 0;
+    background: #1e1e1e;
+    overflow: hidden;
+}
+
+.pad {
+    padding: 30px 20px;
+}
+
+.btn {
+    border-radius: 0;
+}
+
+p {
+    color: #fff;
+}
+
+h1,h2,h3,h4,h5 {
+    color: #fff;
+    margin: 0 0 20px 0;
+}
+
+.modal p,.modal h1,.modal h2,.modal h3,.modal h4 {
+    color: #000;
+}
+
+.btn.btn-signin {
+    background: #1e1e1e;
+    color: #fff;
+    width: 100%;
+}
+
+.btn.btn-signup {
+    background: #ff674c;
+    color: #fff;
+    width: 100%;
+}
+
+.alert {
+    width: 100%;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    line-height: 50px !important;
+    margin: 0;
+}
+
+.alert p {
+    text-align: center;
+    line-height: 50px !important;
+}
+
+.well {
+    background: #2b2b2b;
+    border: 0;
+    outline: 0;
+    border-radius: 0;
+    padding: 30px 50px;
+    margin-top: 15%;
+}
+
+a,a:hover {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+input[type="text"], input[type="email"], input[type="password"], textarea,
+input[type="text"]:hover, input[type="email"]:hover, input[type="password"]:hover, textarea:hover,
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, textarea:focus,
+.form-control[readonly],
+input[type="text"]:disabled, input[type="email"]:disabled, input[type="password"]:disabled, textarea:disabled {
+    border-radius: 0;
+    border: 0;
+    outline: 0;
+    box-shadow: 0 0 0 0;
+    background: #202020;
+    color: #fff;
+}
+
+textarea, textarea:hover, textarea:focus, textarea:disabled {
+    background: #1e1e1e;
+}
+
+.btn {
+    text-decoration: none !important;
+    font-weight: 500 !important;
+}
+
+.alert-info {
+    border: 0;
+    background: #262626;
+}
+
+hr {
+    border: 1px solid #2e2e2e;
+}
+
+table tr:first-child, table tr th {
+    background: #5a5a5a;
+    border: 0;
+    outline: 0;
+    color: #fff;
+    box-shadow: 0 0 0 0;
+}
+
+table {
+    color: #fff;
+}
+
+.well {
+    word-wrap: break-word;
+}
