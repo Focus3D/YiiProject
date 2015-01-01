@@ -9,6 +9,7 @@ $config = [
 	'bootstrap' => [ 'log' ],
 	'language' => 'ru-RU',
 	'components' => [
+		'assetManager' => dirname( __DIR__ . 'assets.php'),
 		'i18n' => [
 			'translations' => [
 				'app*' => [
