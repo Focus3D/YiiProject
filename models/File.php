@@ -19,8 +19,6 @@ class File extends ActiveRecord
 	 * @var UploadedFile|Null file attribute
 	 */
 	public $file;
-	private $filePath = '/Volumes/Warehouse/WebWarehouse/Sharing/';
-	public $savePath = '/Volumes/Warehouse/WebWarehouse/Upload/';
 
 	/**
 	 * @return string table name in database
@@ -28,21 +26,6 @@ class File extends ActiveRecord
 	public static function tableName()
 	{
 		return 'files';
-	}
-
-	public function getSharedFiles()
-	{
-		$files = [];
-
-		$files = scandir($this->filePath);
-
-		foreach ($files as $i => $file) {
-			if (preg_match('/^\./', $file) || !strlen($file)) {
-				unset($files[$i]);
-			}
-		}
-
-		return $files;
 	}
 
 	/**
@@ -62,9 +45,14 @@ class File extends ActiveRecord
 		];
 	}
 
+	public function getFiles()
+	{
+		return $this->find()->asArray()->limit(10)->all();
+	}
+
 	public function findByID($id)
 	{
-		return parent::find(['id' => $id]);
+		return $this->find(['id' => $id])->asArray()->one();
 	}
 
 	public function findByTempName($tmpName)
@@ -77,19 +65,18 @@ class File extends ActiveRecord
 	 *
 	 * @return bool|int идентификатор сохраненного изображения или false - в случаи ошибки
 	 */
-	public function saveImageInfo($path)
+	public function saveFileInfo()
 	{
-		if ($this->image instanceof UploadedFile) {
+		if ($this->file instanceof UploadedFile) {
 			$connection = Yii::$app->db;
 
 			$result = $connection
 				->createCommand()
 				->insert($this->tableName(), [
-					'src' => $path,
-					'name' => $this->image->baseName,
-					'tmp_name' => $this->image->tmpName,
-					'type' => $this->image->type,
-					'size' => $this->image->size,
+					'name' => $this->file->name,
+					'tmp_name' => $this->file->tempName,
+					'type' => $this->file->type,
+					'size' => $this->file->size,
 				])
 				->execute();
 			if ($result) {
@@ -98,7 +85,7 @@ class File extends ActiveRecord
 				return false;
 			}
 		} else {
-			throw new UnknownPropertyException($this->image);
+			throw new UnknownPropertyException($this->file);
 		}
 	}
 

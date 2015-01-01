@@ -39,7 +39,7 @@ class FileController extends Controller
 	public function actionIndex()
 	{
 		$model = new File();
-		$files = $model->getSharedFiles();
+		$files = $model->getFiles();
 
 		return $this->render( 'index', [
 			'files' => $files,
@@ -54,13 +54,37 @@ class FileController extends Controller
 			$model->file = UploadedFile::getInstance($model, 'file');
 
 			if ($model->file && $model->validate()) {
-				$model->file->saveAs($model->savePath . $model->file->baseName . '.' . $model->file->extension);
-				Yii::$app->session->setFlash('file', 'Файл успешно сохранен.');
+				if ($model->file->saveAs(Yii::$app->params['filePath'] . $model->file->baseName . '.' . $model->file->extension) &&
+					$model->saveFileInfo()) {
+					Yii::$app->session->setFlash('file', 'Файл успешно сохранен.');
+				}
 			} else {
 				Yii::$app->session->setFlash('file', 'Ошибка сохранения файла.');
 			}
 
 			$this->redirect(Url::to(['file/index']));
+		}
+	}
+
+	public function actionGet($id)
+	{
+		$model = new File();
+
+		$file = $model->findByID($id);
+		Yii::$app->response->setDownloadHeaders($file['name'], $file['type'], false, $file['size']);
+	}
+
+	public function actionDelete($id)
+	{
+		$model = new File();
+
+		$file = $model->findByID($id);
+
+		if ($file && $model->deleteAll(['id' => $id]) && unlink(Yii::$app->params['filePath'] . $file['name'])) {
+			Yii::$app->session->setFlash('file', 'Файл успешно удален.');
+			$this->redirect(Url::to(['file/index']));
+		} else {
+			Yii::$app->session->setFlash('file', 'Ошибка удаления файла.');
 		}
 	}
 } 

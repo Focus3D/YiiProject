@@ -41,21 +41,23 @@ if (Yii::$app->session->getFlash('file')) : ?>
 			<table class="table table-hover table-bordered file-list">
 				<tr>
 					<td class="col-lg-1">#</td>
-					<td class="col-lg-8">Имя</td>
+					<td class="col-lg-6">Имя файла</td>
+					<td class="col-lg-2">Размер</td>
 					<td class="col-lg-3">Действие</td>
 				</tr>
 				<? $counter = 1; ?>
 				<? foreach ($files as $i => $file) : ?>
 					<tr>
 						<td class="col-lg-1"><?= $counter ?></td>
-						<td class="col-lg-8"><?= $file ?></td>
+						<td class="col-lg-6"><?= $file['name'] ?></td>
+						<td class="col-lg-2"><?= $file['size'] ?> kb</td>
 						<td class="col-lg-3">
-							<a href="<?= Url::to(['file/'. $file .'/download/']) ?>">
+							<a href="<?= Url::to(['file/'. $file['id'] .'/get']) ?>">
 								<span class="glyphicon glyphicon-download" aria-hidden="true"></span>
 								Скачать
 							</a>
 							<?php if (Yii::$app->user->identity->username === 'admin') : ?>
-								<a href="<?= Url::to(['file/'. $file .'/delete/']) ?>">
+								<a href="<?= Url::to(['file/'. $file['id'] .'/delete']) ?>">
 									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 									Удалить
 								</a>

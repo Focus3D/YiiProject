@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					'id' => 'contact',
 					'options' => ['class' => 'form-horizontal'],
 					'fieldConfig' => [
-						'template' => "<div class=\"col-lg-6\">{input}</div>\n<div class=\"col-lg-3\">{error}</div>",
+						'template' => "<div class=\"col-lg-6 col-sm-6 col-xs-6\">{input}</div>\n<div class=\"col-lg-3 col-sm-3 col-xs-3\">{error}</div>",
 					],
 				]); ?>
 					<?= $form->field($model, 'name')->textInput(['placeholder' => $model->getAttributeLabel('name')]) ?>
@@ -48,10 +48,10 @@ $this->params['breadcrumbs'][] = $this->title;
 					<?= $form->field($model, 'subject')->textInput(['placeholder' => $model->getAttributeLabel('subject')]) ?>
 					<?= $form->field($model, 'body')->textArea(['rows' => 6, 'placeholder' => $model->getAttributeLabel('body')]) ?>
 					<?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-						'template' => '<div class="row"><div class="col-lg-6">{input}</div><div class="col-lg-6">{image}</div></div>',
+						'template' => '<div class="row"><div class="col-lg-6 col-sm-6 col-xs-6">{input}</div><div class="col-lg-6 col-sm-6 col-xs-6">{image}</div></div>',
 					]) ?>
 					<div class="form-group">
-						<?= Html::submitButton('Отправить', ['class' => 'btn btn-primary col-lg-offset-1', 'name' => 'contact-button']) ?>
+						<?= Html::submitButton('Отправить', ['class' => 'btn btn-primary col-lg-offset-1 col-sm-offset-1 col-xs-offset-1', 'name' => 'contact-button']) ?>
 					</div>
 				<?php ActiveForm::end(); ?>
 			</div>
