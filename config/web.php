@@ -7,6 +7,7 @@ $config = [
 	'charset' => 'UTF-8',
 	'basePath' => dirname( __DIR__ ),
 	'bootstrap' => [ 'log' ],
+	'sourceLanguage' => 'en-US',
 	'language' => 'ru-RU',
 	'components' => [
 		'i18n' => [
@@ -19,7 +20,9 @@ $config = [
 						'app' => 'app.php',
 						'app/error' => 'error.php',
 						'app/file' => 'file.php',
-						'app/user' => 'user.php'
+						'app/user' => 'user.php',
+						'app/login' => 'login.php',
+						'app/register' => 'register.php',
 					],
 				],
 			],

@@ -28,9 +28,11 @@ $this->title = 'Аутентификация';
 
 			<?= $form->field($model, 'password')->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
 			<div class="row">
-			<?= $form->field($model, 'verifyCode')->textInput(['placeholder' => $model->getAttributeLabel('verifyCode')])->widget(Captcha::className(), [
-				'template' => '<div class="col-lg-6">{input}</div><div class="col-lg-3">{image}</div>',
-			]) ?>
+				<label class="label"><?= $model->getAttributeLabel('verifyCode') ?>
+				<?= $form->field($model, 'verifyCode')->textInput()->widget(Captcha::className(), [
+					'template' => '<div class="col-lg-6">{input}</div><div class="col-lg-3">{image}</div>',
+				]) ?>
+				</label>
 			</div>
 
 			<?= $form->field($model, 'rememberMe', [
@@ -41,10 +43,10 @@ $this->title = 'Аутентификация';
 				<div class="col-md-8 col-md-offset-2">
 					<div class="row">
 						<div class="col-md-6">
-							<?= Html::submitButton(Yii::t('app/login', 'sign in'), ['class' => 'btn btn-signin', 'name' => 'login']) ?>
+							<?= Html::submitButton(Yii::t('app/login', 'Sign in'), ['class' => 'btn btn-signin', 'name' => 'login']) ?>
 						</div>
 						<div class="col-md-6">
-							<?= Html::a(Yii::t('app/login', 'sign up'), Url::toRoute('register'), ['class' => 'btn btn-signup']) ?>
+							<?= Html::a(Yii::t('app/login', 'Sign up'), Url::toRoute('register'), ['class' => 'btn btn-signup']) ?>
 						</div>
 					</div>
 				</div>
@@ -52,8 +54,8 @@ $this->title = 'Аутентификация';
 			<hr>
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
-					<p class="text-center"><?= Yii::t('app/user', 'Forgotten your password? ') ?>
-						<?= Html::a(Yii::t('app/user', 'Recover it here.'), Url::to(['site/recover'])) ?>
+					<p class="text-center"><?= Yii::t('app/login', 'Forgotten your password?') ?>
+						<?= Html::a(Yii::t('app/login', 'Recover it here'), Url::to(['site/recover'])) ?>
 					</p>
 				</div>
 			</div>

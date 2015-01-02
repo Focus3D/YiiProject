@@ -14,49 +14,6 @@ $this->title = 'Регистрация';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-			<!--form action="https://phpaste.ga/register/submit" method="post">
-				<div class="form-group">
-					<input type="email" name="email" class="form-control" placeholder="Email Address">
-				</div>
-
-				<div class="form-group">
-					<input type="text" name="username" maxlength="16" class="form-control" placeholder="Username">
-				</div>
-
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<input type="password" name="password" class="form-control" placeholder="Password">
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<input type="password" name="password_repeat" class="form-control" placeholder="...repeat password">
-						</div>
-					</div>
-				</div>
-				<hr>
-				<p class="text-center text-muted">Please see our <a href="#" data-toggle="modal" data-target="#PassReq">password requirements</a>.</p>
-				<hr>
-				<div class="row">
-					<div class="col-md-8 col-md-offset-2">
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<button type="submit" name="register" class="btn btn-signup btn-block">Sign up</button>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<a href="https://phpaste.ga/login" class="btn btn-signin btn-block">Sign in</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<input name="_token" type="hidden" value="naA9WULDEIPhAE78Baga173AvDDK52C1CNoqdAtS">
-			</form-->
-
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
 		<div class="well">
@@ -83,11 +40,12 @@ $this->params['breadcrumbs'][] = $this->title;
 				<?= $form->field($model, 'password2')->passwordInput(['placeholder' => $model->getAttributeLabel('password2')]) ?>
 				</div>
 			</div>
-			<hr>
 			<div class="row">
-			<?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-				'template' => '<div class="col-lg-6">{input}</div><div class="col-lg-6">{image}</div>',
-			]) ?>
+				<label class="label"><?= $model->getAttributeLabel('verifyCode') ?>
+				<?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+					'template' => '<div class="col-lg-6">{input}</div><div class="col-lg-6">{image}</div>',
+				]) ?>
+				</label>
 			</div>
 			<hr>
 			<div class="row">
