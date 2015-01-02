@@ -92,6 +92,8 @@ class SiteController extends Controller
 
 	public function actionRegister()
 	{
+		$this->layout = 'login';
+
 		$model = new RegisterForm();
 
 		if (Yii::$app->request->isPost) {

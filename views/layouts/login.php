@@ -1,16 +1,13 @@
 <?php
 
-use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
+use app\assets\LoginAsset;
 
 /**
  * @var \yii\web\View $this
  * @var string $content
  */
-Yii::$app->assetManager->loadBundle('login');
+LoginAsset::register($this);
 ?>
 
 <?php $this->beginPage() ?>
