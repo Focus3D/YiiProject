@@ -48,7 +48,7 @@ $config = [
 			'enableAutoLogin' => false,
 		],
 		'errorHandler' => [
-			'errorAction' => 'site/error',
+			'errorAction' => 'error/error',
 		],
 		'mail' => [
 			'class' => 'yii\swiftmailer\Mailer',
