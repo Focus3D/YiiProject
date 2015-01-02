@@ -9,6 +9,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\RegisterForm;
+use app\models\RecoverForm;
 
 class SiteController extends Controller
 {
@@ -111,6 +112,23 @@ class SiteController extends Controller
 		Yii::$app->user->logout();
 
 		return $this->goHome();
+	}
+
+	public function actionRecover()
+	{
+		$this->layout = 'login';
+
+		$model = new RecoverForm();
+
+		if (Yii::$app->request->isPost) {
+			if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+				$this->sendToken();
+			}
+		}
+
+		return $this->render('recover', [
+			'model' => $model,
+		]);
 	}
 
 	public function actionContact()
