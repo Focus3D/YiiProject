@@ -88,31 +88,4 @@ class File extends ActiveRecord
 			throw new UnknownPropertyException($this->file);
 		}
 	}
-
-	/*public function saveImages()
-	{
-		$images = UploadedFile::getInstances( $this, 'image' );
-		$path = Yii::$app->params[ 'uploadFolder' ] . $this->image->baseName . '.' . $this->image->extension;
-
-		foreach ( $images as $image ) {
-
-			$_model = new Image();
-
-			$_model->image = $image;
-
-			if ( $_model->validate() && $_model->image->saveAs( $path ) ) {
-
-				Yii::$app->session->setFlash( 'image[]', 'Изображение успешно сохранено' );
-			} else {
-				foreach ( $_model->getErrors( 'image' ) as $error ) {
-					$this->addError( 'image[]', $error );
-				}
-			}
-		}
-
-		if ( $this->hasErrors( 'image' ) ) {
-			$this->addError( 'image', count( $this->getErrors( 'image' ) ) . ' of ' . count( $images ) . ' files not uploaded');
-			Yii::$app->session->setFlash( 'image', count( $this->getErrors( 'image' ) ) . ' из ' . count( $images ) . ' изображений не загружено' );
-		}
-	}*/
 }

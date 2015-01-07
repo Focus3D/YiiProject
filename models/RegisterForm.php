@@ -41,14 +41,14 @@ class RegisterForm extends ActiveRecord
 	public function rules()
 	{
 		return [
-			[ [ 'username', 'password', 'password2', 'email' ], 'required' ],
-			[ ['username', 'password', 'password2' ], 'string', 'min' => 3, 'max' => 30 ],
-			[ 'email', 'email' ],
-			[ 'password2', 'compare', 'compareAttribute' => 'password' ],
-			[ 'verifyCode', 'captcha' ],
-			[ 'username', 'unique', 'targetAttribute' => 'username' ],
-			[ 'email', 'unique', 'targetAttribute' => 'email' ],
-			[ 'auth_key', 'safe' ],
+			[['username', 'password', 'password2', 'email'], 'required'],
+			[['username', 'password', 'password2'], 'string', 'min' => 3, 'max' => 30],
+			['email', 'email'],
+			['password2', 'compare', 'compareAttribute' => 'password'],
+			['verifyCode', 'captcha'],
+			['username', 'unique', 'targetAttribute' => 'username'],
+			['email', 'unique', 'targetAttribute' => 'email'],
+			['auth_key', 'safe'],
 		];
 	}
 
@@ -56,19 +56,19 @@ class RegisterForm extends ActiveRecord
 	{
 		$security = new Security();
 		$this->auth_key = $security->generateRandomString();
-		$this->password = $security->generatePasswordHash( $this->password );
+		$this->password = $security->generatePasswordHash($this->password);
 
 		$connection = Yii::$app->db;
-		$result = $connection->createCommand()->insert( 'users', [
+		$result = $connection->createCommand()->insert('users', [
 			'username' => $this->username,
 			'password' => $this->password,
 			'email' => $this->email,
 			'auth_key' => $this->auth_key
-		] )->execute();
+		])->execute();
 
-		if ( $result && $result > 0 ) {
-			if ( $user = User::findByUsername( $this->username ) ) {
-				if ( Yii::$app->user->login( $user ) ) {
+		if ($result && $result > 0) {
+			if ($user = User::findByUsername($this->username)) {
+				if (Yii::$app->user->login($user)) {
 					return true;
 				}
 			}

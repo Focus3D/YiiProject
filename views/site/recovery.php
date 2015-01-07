@@ -9,12 +9,11 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\captcha\Captcha;
 
 /**
  * @var yii\web\View $this
  * @var yii\widgets\ActiveForm $form
- * @var app\models\LoginForm $model
+ * @var app\models\RecoveryForm $model
  */
 $this->title = 'Аутентификация';
 ?>
@@ -22,22 +21,25 @@ $this->title = 'Аутентификация';
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
 		<div class="well">
-			<h2 class="text-center">Password Recovery</h2>
-			<?php ActiveForm::begin([
-				'id' => 'recover'
+			<h2 class="text-center"><?= Yii::t('app/login', 'Password Recovery') ?></h2>
+			<?php $form = ActiveForm::begin([
+				'id' => 'recovery-password-form',
+				'fieldConfig' => [
+					'template' => "{input}\n<div>{error}</div>",
+				],
 			]) ?>
 				<div class="form-group">
-					<input type="email" name="email" class="form-control" placeholder="Email Address">
-											</div>
+					<?= $form->field($model, 'email')->textInput(['placeholder' => $model->getAttributeLabel('email')]) ?>
+				</div>
 
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2">
 						<div class="row">
 							<div class="col-md-6">
-								<button type="submit" name="recover" class="btn btn-signup">Recover</button>
+								<?= Html::submitButton(Yii::t('app/login', 'Recovery'), ['class' => 'btn btn-signup']) ?>
 							</div>
 							<div class="col-md-6">
-								<a href="https://phpaste.ga/login" class="btn btn-signin">Sign in</a>
+								<?= Html::a(Yii::t('app/login', 'Sign in'), Url::toRoute('login'), ['class' => 'btn btn-signin']) ?>
 							</div>
 						</div>
 					</div>

@@ -36,12 +36,12 @@ class LoginForm extends Model
 	{
 		return [
 			// username and password are both required
-			[ [ 'username', 'password' ], 'required' ],
+			[['username', 'password'], 'required'],
 			// rememberMe must be a boolean value
-			[ 'rememberMe', 'boolean' ],
+			['rememberMe', 'boolean'],
 			// password is validated by validatePassword()
-			[ 'password', 'validatePassword' ],
-			[ 'verifyCode', 'captcha' ],
+			['password', 'validatePassword'],
+			['verifyCode', 'captcha'],
 		];
 	}
 
@@ -52,13 +52,13 @@ class LoginForm extends Model
 	 *
 	 * @return boolean if password provided is valid for current user
 	 */
-	public function validatePassword( $password )
+	public function validatePassword($password)
 	{
 		$user = $this->getUser();
-		if ( $user instanceof User ) {
-			return Yii::$app->security->validatePassword( $this->password, $user->password );
+		if ($user instanceof User) {
+			return Yii::$app->security->validatePassword($this->password, $user->password);
 		} else {
-			$this->addError( 'username', 'Пользователя с таким логином не существует.' );
+			$this->addError('username', 'Пользователя с таким логином не существует.');
 			return false;
 		}
 	}
@@ -70,15 +70,15 @@ class LoginForm extends Model
 	 */
 	public function login()
 	{
-		if ( $this->validate() ) {
-			return Yii::$app->user->login( $this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0 );
+		if ($this->validate()) {
+			return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
 		} else return false;
 	}
 
 	public function getUser()
 	{
-		if ( $this->_identity === false ) {
-			$this->_identity = User::findByUsername( [ 'username' => $this->username ] );
+		if ($this->_identity === false) {
+			$this->_identity = User::findByUsername(['username' => $this->username]);
 		}
 
 		return $this->_identity;

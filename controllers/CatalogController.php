@@ -10,13 +10,13 @@ namespace app\controllers;
 
 use Yii;
 use yii\web\Controller;
-use app\models\Commodity;
+use app\models\Product;
 
-class CommodityController extends Controller
+class ProductController extends Controller
 {
-	public function actionSave()
+	public function actionAdd()
 	{
-		$model = new Commodity();
+		$model = new Product();
 
 		if ( Yii::$app->request->isPost ) {
 			$model->load( Yii::$app->request->post(), 'Commodity' );

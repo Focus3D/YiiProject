@@ -8,7 +8,7 @@ use yii\captcha\Captcha;
 /**
  * @var yii\web\View $this
  * @var yii\widgets\ActiveForm $form
- * @var app\models\LoginForm $model
+ * @var app\models\RegisterForm $model
  */
 $this->title = 'Регистрация';
 $this->params['breadcrumbs'][] = $this->title;
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			<div class="row">
 				<label class="label"><?= $model->getAttributeLabel('verifyCode') ?>
 				<?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-					'template' => '<div class="col-lg-6">{input}</div><div class="col-lg-6">{image}</div>',
+					'template' => '<div class="col-lg-6 col-md-6 col-sm-6">{input}</div><div class="col-lg-3 col-md-3 col-sm-3">{image}</div>',
 				]) ?>
 				</label>
 			</div>
@@ -51,12 +51,12 @@ $this->params['breadcrumbs'][] = $this->title;
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-lg-6 col-md-6 col-sm-6">
 							<div class="form-group">
 								<?= Html::submitButton(Html::encode(Yii::t('app/register', 'Sign up')), ['class' => 'btn btn-signup btn-block', 'name' => 'login-button']) ?>
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-lg-6 col-md-6 col-sm-6">
 							<div class="form-group">
 								<?= Html::a(Yii::t('app/register', 'Sign in'), Url::toRoute('login'), ['class' => 'btn btn-signin btn-block']) ?>
 							</div>

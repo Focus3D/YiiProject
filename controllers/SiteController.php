@@ -6,10 +6,11 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\RegisterForm;
-use app\models\RecoverForm;
+use app\models\RecoveryForm;
 
 class SiteController extends Controller
 {
@@ -114,19 +115,27 @@ class SiteController extends Controller
 		return $this->goHome();
 	}
 
-	public function actionRecover()
+	public function actionRecovery()
 	{
 		$this->layout = 'login';
 
-		$model = new RecoverForm();
+		$model = new RecoveryForm();
 
 		if (Yii::$app->request->isPost) {
 			if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-				$this->sendToken();
+				if ($model->sendToken()) {
+					Yii::$app->session->setFlash('recoveryMessage', 'Сообщение с для восстановления пароля отправлено');
+					$this->redirect(Url::toRoute('login'));
+				} else {
+					Yii::$app->session->setFlash('recoveryMessage', 'Не удалось отправить сообщение');
+					return $this->render('recovery', [
+						'model' => $model,
+					]);
+				}
 			}
 		}
 
-		return $this->render('recover', [
+		return $this->render('recovery', [
 			'model' => $model,
 		]);
 	}

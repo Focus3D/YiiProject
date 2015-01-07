@@ -14,7 +14,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 use app\models\File;
-use app\models\Commodity;
+use app\models\Product;
 use app\models\User;
 
 class AdminController extends Controller
@@ -44,9 +44,9 @@ class AdminController extends Controller
 
 	public function actionIndex()
 	{
-		$model = new Commodity();
-		$file = new File(['scenario' => 'image']);
+		$model = new Product();
 		$count = User::getCount();
+
 		$dataProvider = new ActiveDataProvider([
 			'query' => User::find(),
 			'pagination' => [
@@ -55,18 +55,14 @@ class AdminController extends Controller
 		]);
 
 		if ( Yii::$app->request->isPost ) {
-			if ( $model->load( Yii::$app->request->post('Commodity') ) && $model->validate() ) {
+			if ( $model->load( Yii::$app->request->post() ) && $model->validate() ) {
 				$model->save();
-			}
-			if ( $file->load( Yii::$app->request->post('Files') ) && $file->validate() ) {
-				$file->save();
 			}
 		}
 
 		return $this->render( 'index', [
-			'commodity' => $model,
+			'model' => $model,
 			'count' => $count,
-			'file' => $file,
 			'dataProvider' => $dataProvider,
 		] );
 	}
