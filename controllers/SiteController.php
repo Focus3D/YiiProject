@@ -65,6 +65,11 @@ class SiteController extends Controller
 		}
 	}
 
+	public function actionConnect()
+	{
+		return $this->render('connect');
+	}
+
 	public function actionLogin()
 	{
 		$this->layout = 'login';
