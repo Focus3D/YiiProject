@@ -14,7 +14,7 @@ use \yii\helpers\Url;
 
 /**
  * @var \yii\web\View $this
- * @var string $content
+ * @var string        $content
  */
 AppAsset::register($this);
 ?>
@@ -57,7 +57,7 @@ AppAsset::register($this);
 		<div class="row">
 			<?= Breadcrumbs::widget([
 				'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-				'homeLink' => ['label' => 'Главная', 'url' => Url::to( [ 'site/index' ] )],
+				'homeLink' => ['label' => 'Главная', 'url' => Url::to(['site/index'])],
 			]) ?>
 		</div>
 		<?= $content ?>
@@ -65,6 +65,7 @@ AppAsset::register($this);
 			<div class="container">
 				<div class="col-lg-12">
 					<p class="pull-left">&copy; Maksim Trunov <?= date('Y') ?></p>
+
 					<p class="pull-right"><?= Yii::powered() ?></p>
 				</div>
 			</div>

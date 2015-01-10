@@ -42,7 +42,6 @@ AppAsset::register($this);
 					'options' => ['class' => 'navbar-nav navbar-right'],
 					'items' => [
 						['label' => 'Home', 'url' => ['/site/index']],
-						['label' => 'About', 'url' => ['/site/about']],
 						['label' => 'Контакт', 'url' => ['/site/contact']],
 						['label' => 'Файлы', 'url' => ['/file/index']],
 						['label' => 'WebRTC', 'url' => ['/site/connect']],
