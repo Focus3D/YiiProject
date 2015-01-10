@@ -39,10 +39,8 @@ class FileController extends Controller
 	public function actionIndex()
 	{
 		$model = new File();
-		$files = $model->getFiles();
 
 		return $this->render( 'index', [
-			'files' => $files,
 			'model' => $model
 		] );
 	}

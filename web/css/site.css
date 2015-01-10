@@ -1,17 +1,19 @@
 body{
-    background-image: url("../images/back.jpg");
-    background-size: cover;
     color: #fff;
+    background: #1e1e1e;
 }
 #users,
-form{ color: #000; }
+#file-form{
+    color: #000;
+    background-color: #fff;
+}
 .background{ background-color: #fff; }
 .padding{ padding: 20px; }
 .green {
     background-color: #006400;
 }
 .breadcrumb {
-    background-color: #B0E0E6;
+    color: #fff;
 }
 caption,
 table{
