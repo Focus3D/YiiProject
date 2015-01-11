@@ -45,7 +45,7 @@ class Image extends ActiveRecord
 		];
 	}
 
-	public function saveImages()
+	public function save()
 	{
 		foreach ($this->image as $image) {
 			if ($image instanceof UploadedFile) {

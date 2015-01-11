@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 /**
  * @var yii\web\View           $this
  * @var yii\widgets\ActiveForm $form
- * @var app\models\File        $model
+ * @var app\models\UploadForm  $files
  */
 $this->title = 'Файлы';
 $this->params['breadcrumbs'][] = $this->title;
@@ -28,7 +28,7 @@ if (Yii::$app->session->getFlash('file')) : ?>
 		'filterSelector' => 'filter',
 		'filterUrl' => Yii::$app->urlManager->createUrl('file/filter'),
 		'dataProvider' => new ActiveDataProvider([
-				'query' => $file::find(),
+				'query' => $files->find(),
 				'pagination' => [
 					'pageSize' => 20,
 				],
@@ -37,7 +37,7 @@ if (Yii::$app->session->getFlash('file')) : ?>
 			['class' => 'yii\grid\SerialColumn'],
 			['class' => 'yii\grid\DataColumn', 'attribute' => 'id',],
 			['class' => 'yii\grid\DataColumn', 'attribute' => 'type', 'label' => 'Тип файла'],
-			['class' => 'yii\grid\DataColumn', 'attribute' => 'name', 'label' => 'Имя файла'],
+			['class' => 'yii\grid\DataColumn', 'attribute' => 'original_name', 'label' => 'Имя файла'],
 			['class' => 'yii\grid\DataColumn', 'attribute' => 'size', 'label' => 'Размер'],
 			['class' => 'yii\grid\ActionColumn', 'controller' => 'file',
 				'template' => '{get} {delete}',
@@ -46,38 +46,24 @@ if (Yii::$app->session->getFlash('file')) : ?>
 							return Html::a('<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>', $url);
 						},
 				],
-				'urlCreator' => function ($action, $file, $key, $index) {
-						return Yii::$app->urlManager->createUrl('file/' . $file->id . '/' . $action);
+				'urlCreator' => function ($action, $files, $key, $index) {
+						return Yii::$app->urlManager->createUrl('file/' . $files->id . '/' . $action);
 					},
 			],
 		]
 	])?>
 </div>
 
-<div class="row">
+<div class="row last">
 	<?php $form = ActiveForm::begin([
-		'id' => 'file-form',
+		'id' => 'files-form',
 		'action' => Url::to(['file/save']),
 		'options' => [
 			'enctype' => 'multipart/form-data',
 			'class' => 'form-inline col-lg-6 col-md-8 col-xs-12',
 		]
 	]) ?>
-	<?= $form->field($file, 'file')->fileInput(); ?>
-	<?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
-	<?php ActiveForm::end() ?>
-</div>
-
-<div class="row">
-	<?php $form = ActiveForm::begin([
-		'id' => 'images-form',
-		'action' => Url::to(['image/save']),
-		'options' => [
-			'enctype' => 'multipart/form-data',
-			'class' => 'form-inline col-lg-6 col-md-8 col-xs-12',
-		]
-	]) ?>
-	<?= $form->field($image, 'image[]')->fileInput(['multiple' => true]); ?>
+	<?= $form->field($files, 'files[]')->fileInput(['multiple' => true]); ?>
 	<?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
 	<?php ActiveForm::end() ?>
 </div>

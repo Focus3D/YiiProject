@@ -28,6 +28,7 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 	<div class="container">
+
 		<div class="page-header">
 			<?php
 			NavBar::begin(
@@ -65,22 +66,25 @@ AppAsset::register($this);
 			NavBar::end();
 			?>
 		</div>
+
 		<div class="row">
 			<?= Breadcrumbs::widget([
 				'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 				'homeLink' => ['label' => 'Главная', 'url' => Url::home()],
 			]) ?>
 		</div>
+
 		<?= $content ?>
-		<footer class="navbar-fixed-bottom">
-			<div class="container">
-				<div class="col-lg-12">
-					<p class="pull-left">&copy; Maksim Trunov <?= date('Y') ?></p>
-					<p class="pull-right"><?= Yii::powered() ?></p>
-				</div>
-			</div>
-		</footer>
+
 	</div>
+	<footer class="page-header navbar-fixed-bottom navbar-inverse">
+		<div class="container">
+			<div class="col-lg-12">
+				<p class="pull-left">&copy; Maksim Trunov <?= date('Y') ?></p>
+				<p class="pull-right"><?= Yii::powered() ?></p>
+			</div>
+		</div>
+	</footer>
 	<?php $this->endBody() ?>
 </body>
 </html>
