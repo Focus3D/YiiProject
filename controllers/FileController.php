@@ -14,6 +14,7 @@ use yii\web\Controller;
 use yii\web\UploadedFile;
 use yii\filters\AccessControl;
 use app\models\File;
+use app\models\Image;
 
 class FileController extends Controller
 {
@@ -38,21 +39,20 @@ class FileController extends Controller
 
 	public function actionIndex()
 	{
-		$model = new File();
-
 		return $this->render( 'index', [
-			'model' => $model
+			'image' => new Image(),
+			'file' => new File(),
 		] );
 	}
 
-	public function actionAdd()
+	public function actionSave()
 	{
 		if (Yii::$app->request->isPost) {
 			$model = new File();
 			$model->file = UploadedFile::getInstance($model, 'file');
 
 			if ($model->file && $model->validate()) {
-				if ($model->file->saveAs(Yii::$app->params['filePath'] . $model->file->baseName . '.' . $model->file->extension) &&
+				if ($model->file->saveAs(Yii::$app->params['fileUploadPath'] . $model->file->baseName . '.' . $model->file->extension) &&
 					$model->saveFileInfo()) {
 					Yii::$app->session->setFlash('file', 'Файл успешно сохранен.');
 				}

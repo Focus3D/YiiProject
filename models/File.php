@@ -34,7 +34,7 @@ class File extends ActiveRecord
 	public function rules()
 	{
 		return [
-			['file', 'file', 'skipOnEmpty' => false],
+			['file', 'file', 'skipOnEmpty' => false, 'on' => 'file'],
 		];
 	}
 
@@ -61,8 +61,6 @@ class File extends ActiveRecord
 	}
 
 	/**
-	 * @param $path string размещение сохраненного изображения
-	 *
 	 * @return bool|int идентификатор сохраненного изображения или false - в случаи ошибки
 	 */
 	public function saveFileInfo()

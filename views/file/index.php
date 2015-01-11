@@ -28,7 +28,7 @@ if (Yii::$app->session->getFlash('file')) : ?>
 		'filterSelector' => 'filter',
 		'filterUrl' => Yii::$app->urlManager->createUrl('file/filter'),
 		'dataProvider' => new ActiveDataProvider([
-				'query' => $model::find(),
+				'query' => $file::find(),
 				'pagination' => [
 					'pageSize' => 20,
 				],
@@ -46,8 +46,8 @@ if (Yii::$app->session->getFlash('file')) : ?>
 							return Html::a('<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>', $url);
 						},
 				],
-				'urlCreator' => function ($action, $model, $key, $index) {
-						return Yii::$app->urlManager->createUrl('file/' . $model->id . '/' . $action);
+				'urlCreator' => function ($action, $file, $key, $index) {
+						return Yii::$app->urlManager->createUrl('file/' . $file->id . '/' . $action);
 					},
 			],
 		]
@@ -57,13 +57,27 @@ if (Yii::$app->session->getFlash('file')) : ?>
 <div class="row">
 	<?php $form = ActiveForm::begin([
 		'id' => 'file-form',
-		'action' => Url::to(['file/add']),
+		'action' => Url::to(['file/save']),
 		'options' => [
 			'enctype' => 'multipart/form-data',
-			'class' => 'form-inline col-lg-6 col-md-6 col-xs-12',
+			'class' => 'form-inline col-lg-6 col-md-8 col-xs-12',
 		]
 	]) ?>
-	<?= $form->field($model, 'file')->fileInput(); ?>
+	<?= $form->field($file, 'file')->fileInput(); ?>
+	<?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+	<?php ActiveForm::end() ?>
+</div>
+
+<div class="row">
+	<?php $form = ActiveForm::begin([
+		'id' => 'images-form',
+		'action' => Url::to(['image/save']),
+		'options' => [
+			'enctype' => 'multipart/form-data',
+			'class' => 'form-inline col-lg-6 col-md-8 col-xs-12',
+		]
+	]) ?>
+	<?= $form->field($image, 'image[]')->fileInput(['multiple' => true]); ?>
 	<?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
 	<?php ActiveForm::end() ?>
 </div>

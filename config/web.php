@@ -36,6 +36,7 @@ $config = [
 			'showScriptName' => false,
 			'suffix' => '.html',
 			'rules' => [
+				'POST <controller:(image)>/<action:(save)>' => '<controller>/<action>',
 				'<controller:(file)>/<id:\d+>/<action:(get|delete)>' => 'file/<action>',
 				'<controller:(user)>/<id:\d+>/<action:(view|update|delete|create)>' => 'user/<action>',
 				'<controller:(admin)>/<action:(index)>' => '<controller>/<action>',

@@ -2,5 +2,6 @@
 
 return [
     'adminEmail' => 'trunovmaks@gmail.com',
-	'filePath' => '/Volumes/Warehouse/WebWarehouse/',
+	'fileUploadPath' => '/Volumes/Warehouse/WebWarehouse/',
+	'imagesUploadPath' => '/Volumes/Warehouse/WebWarehouse/Images/upload/',
 ];
