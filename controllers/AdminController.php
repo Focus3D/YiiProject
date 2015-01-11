@@ -44,15 +44,7 @@ class AdminController extends Controller
 
 	public function actionIndex()
 	{
-		$model = new Product();
-		$count = User::getCount();
-
-		$dataProvider = new ActiveDataProvider([
-			'query' => User::find(),
-			'pagination' => [
-
-			],
-		]);
+		$model = new User();
 
 		if ( Yii::$app->request->isPost ) {
 			if ( $model->load( Yii::$app->request->post() ) && $model->validate() ) {
@@ -62,8 +54,6 @@ class AdminController extends Controller
 
 		return $this->render( 'index', [
 			'model' => $model,
-			'count' => $count,
-			'dataProvider' => $dataProvider,
 		] );
 	}
 
