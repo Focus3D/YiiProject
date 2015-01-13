@@ -60,23 +60,32 @@ class UploadForm extends ActiveRecord
 	 */
 	public function saveFiles()
 	{
+		$counter = 0;
 		foreach ($this->files as $file) {
 			if ($file instanceof UploadedFile) {
-				$saved = $file->saveAs(Yii::$app->params['filePath'] . basename($file->tempName) . '.' . $file->extension);
+				if ($file->saveAs(Yii::$app->params['filePath'] . basename($file->tempName) . '.' . $file->extension)) {
+					$connection = Yii::$app->db;
 
-				$connection = Yii::$app->db;
-
-				$result = $connection
-					->createCommand()
-					->insert($this->tableName(), [
-						'original_name' => $file->name,
-						'name' => basename($file->tempName),
-						'type' => $file->type,
-						'size' => $file->size,
-					])
-					->execute();
-				if (!$result || !$saved) $this->addError('files', 'Ошибка');
+					$result = $connection
+						->createCommand()
+						->insert($this->tableName(), [
+							'original_name' => $file->name,
+							'name' => basename($file->tempName),
+							'type' => $file->type,
+							'size' => $file->size,
+							'extension' => $file->extension,
+						])
+						->execute();
+					if ($result) {
+						$counter++;
+					} else {
+						$this->addError('files', 'Ошибка записи в базу данных.');
+					}
+				} else {
+					$this->addError('files', 'Ошибка записи файла в файловую систему.');
+				}
 			}
 		}
+		return $counter;
 	}
 }

@@ -9,6 +9,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\helpers\Json;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\UploadedFile;
@@ -17,6 +18,9 @@ use app\models\UploadForm;
 
 class FileController extends Controller
 {
+   public $enableCsrfValidation = false;
+
+
 	public function behaviors()
 	{
 		return [
@@ -60,15 +64,21 @@ class FileController extends Controller
 
 	public function actionSave()
 	{
-		if (Yii::$app->request->isPost) {
+		if (Yii::$app->request->isPost && Yii::$app->request->isAjax) {
 			$model = new UploadForm();
 			$model->files = UploadedFile::getInstances($model, 'files');
 
 			if ($model->files && $model->validate()) {
-				$model->saveFiles();
+				$count = $model->saveFiles();
+				if ($count == count($model->files)) {
+					echo Json::encode(['Количество загруженных файлов' => $count]);
+				} else {
+					echo Json::encode($model->getErrors('files'));
+				}
 			}
 
-			$this->redirect(Url::to(['file/index']));
+		} else {
+			echo Json::encode('Не верный формат запроса.');
 		}
 	}
 
@@ -83,12 +93,16 @@ class FileController extends Controller
 	public function actionDelete($id)
 	{
 		$model = new UploadForm();
+		$model->findOne(['id' => $id]);
 
-		if ($model->delete(['id' => $id]) && unlink(Yii::$app->params['filePath'] . $file['name'])) {
-			Yii::$app->session->setFlash('file', 'Файл успешно удален.');
-			$this->redirect(Url::to(['file/index']));
+		if (unlink(Yii::$app->params['filePath'] . $model->getAttribute('original_name') . '.' .$model->getAttribute('extension'))) {
+			if ($model->delete()) {
+				Yii::$app->session->setFlash('file', 'Файл успешно удален.');
+			}
 		} else {
 			Yii::$app->session->setFlash('file', 'Ошибка удаления файла.');
 		}
+
+		$this->goBack();
 	}
 } 
