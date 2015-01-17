@@ -84,18 +84,16 @@ class FileController extends Controller
 
 	public function actionGet($id)
 	{
-		$model = new UploadForm();
+		$model = UploadForm::findOne(['id' => $id]);
 
-		$file = $model->findOne(['id' => $id]);
-		Yii::$app->response->setDownloadHeaders($file['original_name'], $file['type'], false, $file['size']);
+		Yii::$app->response->setDownloadHeaders($model->getAttribute('original_name'), $model->getAttribute('type'), false, $model->getAttribute('size'));
 	}
 
 	public function actionDelete($id)
 	{
-		$model = new UploadForm();
-		$model->findOne(['id' => $id]);
+		$model = UploadForm::findOne(['id' => $id]);
 
-		if (unlink(Yii::$app->params['filePath'] . $model->getAttribute('original_name') . '.' .$model->getAttribute('extension'))) {
+		if (unlink(Yii::$app->params['filePath'] . $model->getAttribute('name') . '.' .$model->getAttribute('extension'))) {
 			if ($model->delete()) {
 				Yii::$app->session->setFlash('file', 'Файл успешно удален.');
 			}
@@ -103,6 +101,6 @@ class FileController extends Controller
 			Yii::$app->session->setFlash('file', 'Ошибка удаления файла.');
 		}
 
-		$this->goBack();
+		$this->redirect(['file/index']);
 	}
 } 

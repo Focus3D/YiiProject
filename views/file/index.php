@@ -3,6 +3,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 use yii\data\ActiveDataProvider;
 use \yii\bootstrap\Progress;
 
@@ -32,7 +33,7 @@ if (Yii::$app->session->getFlash('file')) : ?>
 		'dataProvider' => new ActiveDataProvider([
 				'query' => $files->find(),
 				'pagination' => [
-					'pageSize' => 20,
+					'pageSize' => 10,
 				],
 			]),
 		'columns' => [
@@ -72,6 +73,7 @@ if (Yii::$app->session->getFlash('file')) : ?>
 		]) ?>
 		<?= $form->field($files, 'files[]')->fileInput(['multiple' => true]); ?>
 		<?= Html::submitButton('Отправить <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>', ['class' => 'btn btn-success']) ?>
+		<?= Html::resetButton('', ['class' => 'hidden']) ?>
 		<?= Progress::widget([
 			'id' => 'files-form-progress',
 			'percent' => 0,
