@@ -23,6 +23,7 @@ $config = [
 						'app/user' => 'user.php',
 						'app/login' => 'login.php',
 						'app/register' => 'register.php',
+						'app/chat' => 'chat.php',
 					],
 				],
 			],

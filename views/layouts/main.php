@@ -45,7 +45,7 @@ AppAsset::register($this);
 						['label' => 'Home', 'url' => ['/site/index']],
 						['label' => 'Контакт', 'url' => ['/site/contact']],
 						['label' => 'Файлы', 'url' => ['/file/index']],
-						['label' => 'WebRTC', 'url' => ['/site/connect']],
+						['label' => 'WebSocket', 'url' => ['/site/chat']],
 						(Yii::$app->user->identity->username === 'admin') ?
 							['label' => 'Admin panel', 'url' => ['/admin/index']] : '',
 						['label' => 'Выйти (' . Yii::$app->user->identity->username . ')', 'url' => ['/site/logout'], 'linkOptions' => ['data-method' => 'get']],

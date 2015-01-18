@@ -65,9 +65,9 @@ class SiteController extends Controller
 		}
 	}
 
-	public function actionConnect()
+	public function actionChat()
 	{
-		return $this->render('connect');
+		return $this->render('chat');
 	}
 
 	public function actionLogin()
