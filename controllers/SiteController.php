@@ -70,6 +70,11 @@ class SiteController extends Controller
 		return $this->render('chat');
 	}
 
+	public function actionWs()
+	{
+		return $this->render('socket');
+	}
+
 	public function actionLogin()
 	{
 		$this->layout = 'login';
