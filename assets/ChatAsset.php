@@ -22,6 +22,7 @@ class ChatAsset extends AssetBundle
 		'css/site.css',
 	];
 	public $js = [
+		'js/sipml5.js',
 		'js/chat.js',
 	];
 	public $depends = [

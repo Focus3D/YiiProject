@@ -58,21 +58,12 @@ class SiteController extends Controller
 
 	public function actionIndex()
 	{
-		if (\Yii::$app->user->isGuest) {
-			return $this->actionLogin();
-		} else {
-			return $this->render('index');
-		}
+		return $this->render('index');
 	}
 
-	public function actionChat()
+	public function actionRtc()
 	{
-		return $this->render('chat');
-	}
-
-	public function actionWs()
-	{
-		return $this->render('socket');
+		return $this->render('rtc');
 	}
 
 	public function actionLogin()

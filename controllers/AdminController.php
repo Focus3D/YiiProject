@@ -28,7 +28,7 @@ class AdminController extends Controller
 				'rules' => [
 					[
 						'allow' => true,
-						'ips' => ['77.120.128.77', '127.0.0.1'],
+						'ips' => ['77.120.128.77', '127.0.0.1', '10.0.0.2'],
 					],
 				],
 			],
